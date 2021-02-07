@@ -1,0 +1,4 @@
+As páginas HTML com o nome "ADM" serão de uso próprio dos administradores do site.
+Depois quando formos fazer o banco de dados, vamos criar uma função js para
+criar os botões de Adicionar e Alterar produto no "index.html", e vamos deletar
+o "indexADM.html". Colocamos ele só para demonstrar como vai ficar.
