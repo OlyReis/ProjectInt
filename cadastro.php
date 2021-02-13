@@ -83,6 +83,10 @@
               <input class="form-check-input" id="validationCustomMasculino" type="radio" name="Sexo" id="SexoFeminino" value="optionFeminino" required>
               <label class="form-check-label" for="RadioFeminino">Feminino</label>
             </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="Sexo" id="SexoFeminino" value="optionOutro" required>
+              <label class="form-check-label" for="RadioFeminino">Outro</label>
+            </div>
           </div>
         </div>
         <div class="form-row">
@@ -102,7 +106,7 @@
           </div>
           <div class="col mb-3">
             <label form="labelTelefone" class="mb-0">*Telefone</label>
-            <input type="text" class="form-control input rounded-0 telefone" placeholder="(00) 0000-00009" data-mask="(00) 0000-00009" id="telefone" name="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" required>
+            <input type="text" class="form-control input rounded-0 telefone" placeholder="(00) 0000-00000" data-mask="(00) 0000-00000" id="telefone" name="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" required>
             <div class="invalid-feedback">
               Por favor insira um Telefone válido.
             </div>
@@ -180,7 +184,7 @@
             </div>
           </div>       
         </div>
-        <button class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnCadastrar">Cadastrar</button>
+        <button type="submit" class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnCadastrar">Cadastrar</button>
       </form>
     </div>
 
