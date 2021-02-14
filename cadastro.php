@@ -45,7 +45,7 @@ include("conexao.php");
 
     <h1 class="col-12">Cadastro</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" method="GET" name="tTeste" action="insert.php" >
+      <form class="needs-validation m-4" name="tTeste" method="GET" action="insert.php" >
         <div class="form-row mb-2 mt-3">
           <label form="labelNome">*Campos Obrigatórios</label>
         </div>
@@ -68,7 +68,7 @@ include("conexao.php");
         <div class="form-row mb-3">
           <div class="col">
             <label form="labelDataNascimento">*Data de Nascimento</label>
-            <input class="form-control input rounded-0" id="validationCustomData" name="date" placeholder="*Dia/Mês/Ano" type="text" data-mask="00/00/0000" name="data_nascimento" required>
+            <input class="form-control input rounded-0" id="validationCustomData" placeholder="*Ano/Mês/Dia" type="text" data-mask="0000/00/00" name="data_nascimento" required>
             <div class="invalid-feedback" id="datainvalida">
               Por favor insira uma data válida.
             </div>
@@ -187,7 +187,7 @@ include("conexao.php");
             </div>
           </div>       
         </div>
-        <button type="submit" class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnCadastrar">Cadastrar</button>
+        <input type="submit" class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnCadastrar" value="Cadastrar">
       </form>
     </div>
 
