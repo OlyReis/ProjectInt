@@ -1,3 +1,6 @@
+<<?php 
+include("conexao.php");
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +45,7 @@
 
     <h1 class="col-12">Cadastro</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" novalidate>
+      <form class="needs-validation m-4" method="GET" name="tTeste" action="insert.php" >
         <div class="form-row mb-2 mt-3">
           <label form="labelNome">*Campos Obrigatórios</label>
         </div>
@@ -76,16 +79,16 @@
           <div class="col">
             <label form="labelSexo" class="mb-3">*Sexo</label><br>
             <div class="form-check form-check-inline ml-3">
-              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="Sexo" id="SexoMasculino" value="optionMasculino" required>
+              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="sexo" id="SexoMasculino" value="optionMasculino" required>
               <label class="form-check-label" for="RadioMasculino">Masculino</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="Sexo" id="SexoFeminino" value="optionFeminino" required>
+              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="sexo" id="SexoFeminino" value="optionFeminino" required>
               <label class="form-check-label" for="RadioFeminino">Feminino</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="Sexo" id="SexoFeminino" value="optionOutro" required>
-              <label class="form-check-label" for="RadioFeminino">Outro</label>
+              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="sexo" id="SexoOutro" value="optionOutro" required>
+              <label class="form-check-label" for="RadioOutro">Outro</label>
             </div>
           </div>
         </div>
@@ -125,7 +128,7 @@
             <input type="number" class="form-control input rounded-0" id="validationCustomEndereçoNumero" onkeydown="javascript: return event.keyCode == 69 ? false : true" placeholder="*Nº" name="num_endereco" required>
           </div>
           <div class="col mt-4 col-sm-4">
-            <input type="text" class="form-control input rounded-0" id="validationCustomComplemento" name="complemento_endereco" placeholder="Complemento">
+            <input type="text" class="form-control input rounded-0" id="validationCustomComplemento" name="complemento" placeholder="Complemento">
           </div>
         </div>
 
