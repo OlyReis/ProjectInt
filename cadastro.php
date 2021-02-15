@@ -45,7 +45,7 @@ include("conexao.php");
 
     <h1 class="col-12">Cadastro</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" name="tTeste" method="GET" action="insert.php" >
+      <form class="needs-validation m-4" name="tTeste" method="POST" action="insert.php" >
         <div class="form-row mb-2 mt-3">
           <label form="labelNome">*Campos Obrigatórios</label>
         </div>
@@ -79,15 +79,15 @@ include("conexao.php");
           <div class="col">
             <label form="labelSexo" class="mb-3">*Sexo</label><br>
             <div class="form-check form-check-inline ml-3">
-              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="sexo" id="SexoMasculino" value="optionMasculino" required>
+              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="sexo" id="SexoMasculino" value="Masculino" required>
               <label class="form-check-label" for="RadioMasculino">Masculino</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="sexo" id="SexoFeminino" value="optionFeminino" required>
+              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="sexo" id="SexoFeminino" value="Feminino" required>
               <label class="form-check-label" for="RadioFeminino">Feminino</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="sexo" id="SexoOutro" value="optionOutro" required>
+              <input class="form-check-input" id="validationCustomMasculino" type="radio" name="sexo" id="SexoOutro" value="Outro" required>
               <label class="form-check-label" for="RadioOutro">Outro</label>
             </div>
           </div>
