@@ -44,7 +44,7 @@
 
     <h1 class="col-12">Adicionar Produto</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" novalidate>
+      <form class="needs-validation m-4" method="GET" enctype="multipart/form-data">
         <div class="form-row mb-3 mt-3">
           <div class="col">
             <label form="labelNomeProduto" class="mb-0">Nome do Produto</label> 
@@ -80,7 +80,7 @@
           </div>
           <div class="col mt-0">
             <label form="labelEstoqueProduto" class="mb-0">Estoques do Produto</label>
-            <input type="number" class="form-control input rounded-0 mt-0" id="estoqueProduto" onkeydown="javascript: return event.keyCode == 69 ? false : true" placeholder="Digite o Estoque do Produto" name="precoProduto" required>
+            <input type="number" class="form-control input rounded-0 mt-0" id="estoqueProduto" onkeydown="javascript: return event.keyCode == 69 ? false : true" placeholder="Digite o Estoque do Produto" name="estoqueProduto" required>
             <div class="invalid-feedback">
               Por favor insira um número válido.
             </div>
@@ -89,12 +89,12 @@
         <div class="form-row mb-3 mt-3">
           <div class="col">
             <label form="labelNumTamanho" class="mb-0">Número de Tamanhos do Produto (Máximo 10)</label>
-            <input type="number" name="numTamanhos" class="form-control input rounded-0 mt-0" id="numTamanhos" placeholder="Digite a Quantidade de Tamanhos do Produto" onkeydown="javascript: return event.keyCode == 69 ? false : true" onKeyPress="if (this.value.length >= 2) return false;" required>
+            <input type="number" name="numTamanhos" class="form-control input rounded-0 mt-0" id="numTamanhos" placeholder="Digite a Quantidade de Tamanhos do Produto" onkeydown="javascript: return event.keyCode == 69 ? false : true" onKeyPress="if (this.value.length >= 2) return false;">
             <div class="invalid-feedback">Por favor insira um número válido.</div>
           </div>
           <div class="col">
             <label form="labelTamanhosProduto" class="mb-0">Tamanhos (Separados por vírgula)</label>
-            <input type="text" name="tamanhosProduto" class="form-control input rounded-0 mt-0" id="tamanhosProduto" placeholder="Digite os Tamanhos do Produto" onKeyPress="if (this.value.length >= 29) return false;" required>
+            <input type="text" name="tamanhosProduto" class="form-control input rounded-0 mt-0" id="tamanhosProduto" placeholder="Digite os Tamanhos do Produto" onKeyPress="if (this.value.length >= 29) return false;">
             <div class="invalid-feedback">Por favor insira um tamanho válido.</div>
           </div>
         </div>
@@ -105,7 +105,7 @@
         </div>
         <div class="form-row mb-3 mt-0">
           <div class="col mb-3" id="imgProduto">
-            <input type="file" class="form-control-file" id="exampleFormControlFile1" required>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="foto" required>
             <div class="invalid-feedback mb-3">Por favor insira uma imagem válida.</div>
           </div>
         </div>
