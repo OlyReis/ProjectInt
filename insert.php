@@ -4,7 +4,7 @@ include("conexao.php");
 
 function inserir($conexao, $nome, $sobrenome, $data_nascimento, $sexo, $cpf, $cep, $telefone, $endereco, $num_endereco, $complemento, $cidade, $bairro, $estado, $email, $senha) {
 	
-	$script = 'INSERT INTO usuario VALUES (DEFAULT, "' . 0 . '", "' . $nome . '", "' . $sobrenome . '","' . $data_nascimento .'","' . $sexo . '", "' . $cpf . '", "' . $cep . '", "' . $telefone . '", "' . $endereco . '", "' . $num_endereco . '", "' . $complemento . '", "' . $cidade . '", "' . $bairro . '", "' . $estado . '", "' . $email . '", ' . $senha . ')';
+	$script = 'INSERT INTO usuarios VALUES (DEFAULT, "' . 0 . '", "' . $nome . '", "' . $sobrenome . '","' . $data_nascimento .'","' . $sexo . '", "' . $cpf . '", "' . $cep . '", "' . $telefone . '", "' . $endereco . '", "' . $num_endereco . '", "' . $complemento . '", "' . $cidade . '", "' . $bairro . '", "' . $estado . '", "' . $email . '", ' . $senha . ')';
 
 	$insere = $conexao->query($script);
 
@@ -39,6 +39,6 @@ $senha = $_POST['senha'];
 
 inserir($conexao, $nome, $sobrenome, $data_nascimento, $sexo, $cpf, $cep, $telefone, $endereco, $num_endereco, $complemento, $cidade, $bairro, $estado, $email, $senha);
 
-header('Location: /ProjectInt/login.php');
+
 
  ?>
