@@ -44,7 +44,7 @@
 
     <h1 class="col-12">Adicionar Produto</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" method="GET" enctype="multipart/form-data">
+      <form class="needs-validation m-4" method="" enctype="multipart/form-data" action="insertProduto.php">
         <div class="form-row mb-3 mt-3">
           <div class="col">
             <label form="labelNomeProduto" class="mb-0">Nome do Produto</label> 
