@@ -18,7 +18,7 @@ function inserir($conexao, $dad){
 	}
 }
 
-$dad = array($_GET['nome'], $_GET['sobrenome'],$_GET['data_nascimento'],$_GET['sexo'],$_GET['cpf'],$_GET['cep'],$_GET['telefone'],$_GET['endereco'],$_GET['num_endereco'],$_GET['complemento'],$_GET['cidade'],$_GET['bairro'],$_GET['estado'],$_GET['email'],$_GET['senha']);
+$dad = array($_POST['nome'], $_POST['sobrenome'],$_POST['data_nascimento'],$_POST['sexo'],$_POST['cpf'],$_POST['cep'],$_POST['telefone'],$_POST['endereco'],$_POST['num_endereco'],$_POST['complemento'],$_POST['cidade'],$_POST['bairro'],$_POST['estado'],$_POST['email'],$_POST['senha']);
 
 
 
