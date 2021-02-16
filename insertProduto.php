@@ -1,9 +1,9 @@
 <?php 
 include("conexao.php");
 
-function inserir($conexao, $dad, $destino){
+function inserir($conexao,$destino,$nomeProduto,$lancamentoProduto,$descricaoProdutoMenu,$precoProduto,$estoqueProduto,$numTamanhos,$tamanhosProduto,$descricaoProduto){
 	
-	$script = 'INSERT INTO produto VALUES (DEFAULT, "' . $dad[0] . '", "' . $dad[1] . '", "' . $dad[2] . '","' . $dad[3] .'","' . $dad[4] .'","' . $dad[5] .'","' . $dad[6] .'","' . $destino . '","' . $dad[7] .'")';
+	$script = 'INSERT INTO produto VALUES (DEFAULT, "' . $nomeProduto . '", "' . $lancamentoProduto . '", "' . $descricaoProdutoMenu . '","' . $precoProduto .'","' . $estoqueProduto .'","' . $numTamanhos .'","' . $tamanhosProduto .'","' . $destino . '","' . $descricaoProduto .'")';
 
 	/*$insere = $conexao->query($script);
 	if(!$insere){
@@ -32,14 +32,21 @@ if(!$insere){
 }
 }
 
+$nomeProduto=$_GET['nomeProduto'];
+$lancamentoProduto=$_GET['lancamentoProduto'];
+$descricaoProdutoMenu=$_GET['descricaoProdutoMenu'];
+$precoProduto=$_GET['precoProduto'];
+$estoqueProduto=$_GET['estoqueProduto']; 
+$numTamanhos=$_GET['numTamanhos'];
+$tamanhosProduto=$_GET['tamanhosProduto'];
+$descricaoProduto=$_GET['descricaoProduto'];
 
-$dad = array($_GET['nomeProduto'], $_GET['lancamentoProduto'], $_GET['descricaoProdutoMenu'], $_GET['precoProduto'], $_GET['estoqueProduto'], $_GET['numTamanhos'], $_GET['tamanhosProduto'], $_GET['descricaoProduto']);
 $dir= "Img/";
 $file= $_FILES['foto'];
 $destino= "$dir".$file["name"];
 
 move_uploaded_file($file['tmp_name'], $destino);
 
-inserir($conexao,$dad,$destino);
+inserir($conexao,$destino,$nomeProduto,$lancamentoProduto,$descricaoProdutoMenu,$precoProduto,$estoqueProduto,$numTamanhos,$tamanhosProduto,$descricaoProduto);
 
 ?>
