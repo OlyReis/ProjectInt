@@ -24,10 +24,10 @@ form.classList.add('was-validated');
 //DATE PICKER
 $(document).ready(function(){
   var data = new Date();
-  var date_input=$('input[name="date"]'); //our date input has the name "date"
+  var date_input=$('input[name="data_nascimento"]'); //our date input has the name "date"
   var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
   var options={
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'yy/mm/dd',
     container: container,
     changeYear: true,
     changeMonth: true,
@@ -49,13 +49,9 @@ $(document).ready(function(){
 })
 
 
+
 $("#btnCadastrar").click(validaSenhas);
 
-setInterval(function() { 
-  if (ativaKeyUpFunctions == true) {
-    validaData();
-  }
-},50);
 $("#validationCustomSenha").keyup(function() {
   if (ativaKeyUpFunctions == true) {
     validaSenhas();
@@ -67,40 +63,11 @@ $("#validationCustomConfirmaSenha").keyup(function() {
   }
 });
 
-function validaData() {
-  
-  var data = document.getElementById("validationCustomData").value;
-  var dataAtual = new Date();
-
-  var dia = data.substring(0,2);
-  var mes = data.substring(3,5);
-  var ano = data.substring(6,10);
-
-  var novaData = new Date(ano,(mes-1),dia);
-
-  var mesmoDia = parseInt(dia,10) == parseInt(novaData.getDate());
-  var mesmoMes = parseInt(mes,10) == parseInt(novaData.getMonth())+1;
-  var mesmoAno = parseInt(ano) == parseInt(novaData.getFullYear());
-
-  if (!((mesmoDia) && (mesmoMes) && (mesmoAno) && (ano.length == 4)) || (novaData > dataAtual))
-  {
-    document.getElementById("datainvalida").innerHTML = "Por favor insira uma data válida.";
-    document.getElementById("datainvalida2").innerHTML = "Por favor insira uma data válida.";
-    $("#validationCustomData").css("border-color", "#dc3545");              
-  } else {
-    $("#validationCustomData").css("border-color", "#28a745");
-    document.getElementById("datainvalida").innerHTML = "";
-   document.getElementById("datainvalida2").innerHTML = "";
-  }
-}
-
 function validaSenhas() {
   var senha1 = document.getElementById("validationCustomSenha").value;
   var senha2 = document.getElementById("validationCustomConfirmaSenha").value;
   if ((senha1 == senha2) && (senha1 != "")){
     console.log("senha igual");
-    $("#validationCustomSenha").css("border-color", "#28a745");
-    $("#validationCustomConfirmaSenha").css("border-color", "#28a745");
     document.getElementById("senhainvalida").innerHTML = "";
     document.getElementById("senhainvalida2").innerHTML = "";
     document.getElementById("senhaconfirmainvalida").innerHTML = "";
@@ -111,8 +78,19 @@ function validaSenhas() {
     document.getElementById("senhainvalida2").innerHTML = "Por favor insira uma Senha válida.";
     document.getElementById("senhaconfirmainvalida").innerHTML = "Por favor insira uma Senha válida.";
     document.getElementById("senhaconfirmainvalida2").innerHTML = "Por favor insira uma Senha válida.";
-    $("#validationCustomSenha").css("border-color", "#dc3545");
-    $("#validationCustomConfirmaSenha").css("border-color", "#dc3545");
+    document.getElementById("validationCustomSenha").isValid = false;
+    document.getElementById("validationCustomConfirmaSenha").isValid = false;
+    if ((document.getElementById("validationCustomNome").value.trim() != "") && (document.getElementById("validationCustomSobrenome").value.trim()!= "")
+      && (document.getElementById("validationCustomData").value.trim() != "") && ($('input[name=sexo]:checked').length > 0)
+      && (document.getElementById("validationCustomCPF").value.trim() != "") && (document.getElementById("validationCustomCEP").value.trim()!= "")
+      && (document.getElementById("telefone").value.trim()!= "") && (document.getElementById("validationCustomEndereço").value.trim()!= "")
+      && (document.getElementById("validationCustomEndereçoNumero").value.trim()!= "")
+      && (document.getElementById("validationCustomCidade").value.trim()!= "") && (document.getElementById("validationCustomBairro").value.trim()!= "")
+      && (document.getElementById("validationCustomEstado").value.trim()!= "") && (document.getElementById("validationCustomEmail").value.trim()!= "")) {
+      $("#validationCustomSenha").css("border-color", "#dc3545");
+      $("#validationCustomConfirmaSenha").css("border-color", "#dc3545");
+      return false;
+    }
   }
 }
 
