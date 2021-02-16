@@ -45,7 +45,7 @@ include("conexao.php");
 
     <h1 class="col-12">Cadastro</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" name="tTeste" method="POST" action="insert.php" >
+      <form class="needs-validation m-4" name="tTeste" method="POST" action="insert.php" onsubmit="validaSenhas()" >
         <div class="form-row mb-2 mt-3">
           <label form="labelNome">*Campos Obrigatórios</label>
         </div>
@@ -68,7 +68,7 @@ include("conexao.php");
         <div class="form-row mb-3">
           <div class="col">
             <label form="labelDataNascimento">*Data de Nascimento</label>
-            <input class="form-control input rounded-0" id="validationCustomData" placeholder="*Ano/Mês/Dia" type="text" data-mask="0000/00/00" name="data_nascimento" required>
+            <input class="form-control input rounded-0" id="validationCustomData" placeholder="*Ano/Mês/Dia" type="text" data-mask="0000/00/00" name="data_nascimento" readonly="" required>
             <div class="invalid-feedback" id="datainvalida">
               Por favor insira uma data válida.
             </div>
@@ -109,7 +109,7 @@ include("conexao.php");
           </div>
           <div class="col mb-3">
             <label form="labelTelefone" class="mb-0">*Telefone</label>
-            <input type="text" class="form-control input rounded-0 telefone" placeholder="(00) 0000-00000" data-mask="(00) 0000-00000" id="telefone" name="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" required>
+            <input type="text" class="form-control input rounded-0 telefone" placeholder="(00) 0000-00009" data-mask="(00) 0000-00000" id="telefone" name="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" required>
             <div class="invalid-feedback">
               Por favor insira um Telefone válido.
             </div>
@@ -149,7 +149,7 @@ include("conexao.php");
           </div>
           <div class="col mt-3">
             <label form="labelBairro" class="mb-0">*Estado</label> 
-            <input type="text" class="form-control input rounded-0" id="validationCustomBairro" placeholder="*Digite seu Estado" onKeyPress="if(this.value.length==2) return false;" pattern="[a-zA-Z]{2}" name="estado" required>
+            <input type="text" class="form-control input rounded-0" id="validationCustomEstado" placeholder="*Digite seu Estado" onKeyPress="if(this.value.length==2) return false;" pattern="[a-zA-Z]{2}" name="estado" required>
             <div class="invalid-feedback">
               Por favor insira um Estado válido.
             </div>
