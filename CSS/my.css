@@ -55,9 +55,13 @@ input[type="radio"] {
   border-radius: 50%;
 
 }
+input[type="radio"]:disabled {
+ background-color: white;
+}
 input[type="radio"]:checked {
  background-color: #007bff;
 }
+
 .textarea {
   border-color: grey;
   border-width: 2px;
