@@ -15,9 +15,3 @@ form.classList.add('was-validated');
 });
 }, false);
 })();
-
-$("#deletarConta").click(function() {
-  if (confirm("Pressione OK para continuar")) {
-    var senha = prompt("Digite sua senha e clique em OK para excluir sua conta");
-  } 
-})
