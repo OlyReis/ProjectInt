@@ -11,9 +11,13 @@
     echo 'Existe';
     $_SESSION['email'] = $email;
     $_SESSION['senha'] = $senha;
+    echo "<script> alert('Login Conectado!')</script>";
+    echo '<script>window.location="index.php"</script>';
   } else {
     echo 'Não Existe';
     unset ($_SESSION['email']);
     unset ($_SESSION['senha']);
+    echo "<script> alert('Email ou senha incorretos.') </script>";
+    echo '<script>window.location="login.php"</script>';
   }
 ?>
