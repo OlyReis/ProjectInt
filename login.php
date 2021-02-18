@@ -43,11 +43,11 @@
   <h1 class="col-12">Login</h1><br>
   <div class="container col-12 divlogin rounded border border-primary mb-5"> 
 
-    <form class="needs-validation m-4" novalidate>
+    <form class="needs-validation m-4" action="acaoVerificaLogin.php" method="POST"  novalidate>
       <div class="form-row mb-2 mt-3">
         <div class="col">
           <label for="labelEmail" class="mb-0">Email</label>
-          <input type="email" class="form-control input rounded-0" id="validationCustomEmail" placeholder="Digite o seu e-mail" required>
+          <input type="email" class="form-control input rounded-0" id="validationCustomEmail" placeholder="Digite o seu e-mail" name="email" required>
           <div class="invalid-feedback">
             Por favor insira um e-mail válido.
           </div>
@@ -57,7 +57,7 @@
       <div class="form-row mb-3 mt-0">
         <div class="col mb-1" id="senha">
           <label form="labelSenha" class="mb-0">Senha</label> 
-          <input type="password" class="form-control input rounded-0" id="validationCustomSenha" placeholder="Digite a sua senha" required>       
+          <input type="password" class="form-control input rounded-0" id="validationCustomSenha" placeholder="Digite a sua senha" name="senha" required>
           <div class="invalid-feedback">
             Por favor insira uma senha válida.
           </div>
