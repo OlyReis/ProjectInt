@@ -61,10 +61,22 @@ input[type="radio"]:disabled {
 input[type="radio"]:disabled:hover {
  background-color: white;
 }
+.darkmode--activated input[type="radio"]:disabled {
+ background-color: black;
+}
+.darkmode--activated input[type="radio"]:disabled:hover {
+ background-color: black;
+}
 input[type="radio"]:checked {
  background-color: #007bff;
 }
 input[type="radio"]:checked:hover {
+ background-color: #007bff;
+}
+.darkmode--activated input[type="radio"]:checked {
+ background-color: #007bff;
+}
+.darkmode--activated input[type="radio"]:checked:hover {
  background-color: #007bff;
 }
 .textarea {
