@@ -75,7 +75,7 @@
 
     <h1 class="col-12">Seus dados</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" novalidate>
+      <form class="needs-validation m-4" novalidate action="acaoAlterarUsuario.php" method="POST">
         <div class="form-row mb-3 mt-3">
           <div class="col">
             <label form="labelNome" class="mb-0">Nome</label> 
@@ -184,7 +184,7 @@
           </div>
         </div>
 
-        <button class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnCadastrar">Alterar dados</button>
+        <button class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnCadastrar" type="submit">Alterar dados</button>
       </form>
     </div>
     <div class="container">
@@ -280,7 +280,6 @@
       new Darkmode().showWidget();
     </script>
     <script type="JS/Bootstrap.mim.js"></script>
-    <script type="text/javascript" src="JS/usuario.js"></script>
     <script type="text/javascript" src="JS/jquery.mask.js"></script>
     <script type="text/javascript" src="JS/jquery.mask.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
