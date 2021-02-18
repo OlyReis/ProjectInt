@@ -58,10 +58,15 @@ input[type="radio"] {
 input[type="radio"]:disabled {
  background-color: white;
 }
+input[type="radio"]:disabled:hover {
+ background-color: white;
+}
 input[type="radio"]:checked {
  background-color: #007bff;
 }
-
+input[type="radio"]:checked:hover {
+ background-color: #007bff;
+}
 .textarea {
   border-color: grey;
   border-width: 2px;
