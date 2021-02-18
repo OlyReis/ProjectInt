@@ -4,7 +4,7 @@ include("conexao.php");
 
 function inserir($conexao, $nome, $sobrenome, $data_nascimento, $sexo, $cpf, $cep, $telefone, $endereco, $num_endereco, $complemento, $cidade, $bairro, $estado, $email, $senha) {
 	
-	$script = 'INSERT INTO usuarios VALUES (DEFAULT, "' . 0 . '", "' . $nome . '", "' . $sobrenome . '","' . $data_nascimento .'","' . $sexo . '", "' . $cpf . '", "' . $cep . '", "' . $telefone . '", "' . $endereco . '", "' . $num_endereco . '", "' . $complemento . '", "' . $cidade . '", "' . $bairro . '", "' . $estado . '", "' . $email . '", ' . $senha . ')';
+	$script = 'INSERT INTO usuarios VALUES (DEFAULT, "' . 0 . '", "' . $nome . '", "' . $sobrenome . '","' . $data_nascimento . '","' . $sexo . '", "' . $cpf . '", "' . $cep . '", "' . $telefone . '", "' . $endereco . '", "' . $num_endereco . '", "' . $complemento . '", "' . $cidade . '", "' . $bairro . '", "' . $estado . '", "' . $email . '", ' . $senha . ')';
 
 	$insere = $conexao->query($script);
 
@@ -14,8 +14,12 @@ function inserir($conexao, $nome, $sobrenome, $data_nascimento, $sexo, $cpf, $ce
 		echo "<br><br>";
 		echo $script;
 		echo "<br>";
+		echo "<script> alert('Cadstro Incorreto. Favor verificar dados.')</script>";
+		echo '<script>window.location="cadastro.php"</script>';
 	}else{
 		echo "<br>Inserção Realizada corretamente!";
+		echo "<script> alert('Cadastro Concluído! Faça login para continuar.') </script>";
+		echo '<script>window.location="login.php"</script>';
 	}
 }
 
