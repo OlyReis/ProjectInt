@@ -51,7 +51,8 @@
               <p class="text-light mt-0 ml-1">Ano de lançamento: 2019</p>
               <h2 class="text-light mb-0">Preço: R$ 68,90</h2>
               <p class="mb-4 text-light mt-0 ml-1" name="numEstoque">Estoque: 5</p>
-              <a class="btn btn-dark text-light mb-2" href="carrinho.php" role="button" id="comprarProduto">Comprar</a> <a class="btn btn-dark mb-2" href="#" role="button" id="adicionarCarrinho">Adicionar ao carrinho</a>
+              <a class="btn btn-dark text-light mb-2" href="carrinho.php" role="button" id="comprarProduto">Comprar</a> 
+              <a class="btn btn-dark mb-2" href="acaoAdicionarAoCarrinho.php" role="button" id="adicionarCarrinho">Adicionar ao carrinho</a>
             </div>
           </div>
         </div>
