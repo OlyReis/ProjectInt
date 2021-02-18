@@ -25,6 +25,20 @@ label {
   color: black;
 }
 
+.darkmode--activated textarea {
+  background-color: black;
+  color: white;
+}
+.darkmode--activated .inputpw {
+  background-color: black;
+  border: 1px solid grey;
+  color: white;
+}
+
+.darkmode--activated hr {
+  background-color: #2A2A2A;
+}
+
 .input {
   border-color: grey;
   border-width: 0 0 2px;
