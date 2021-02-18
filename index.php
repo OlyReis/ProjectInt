@@ -2,12 +2,14 @@
   include('conexao.php');
 
   session_start();
- 
-  $logado = $_SESSION['email'];
-  $script = 'SELECT * FROM usuarios WHERE email = "' . $logado . '"';
-  $consulta = $conexao->query($script);
-  $linha = $consulta->fetch_array(MYSQLI_ASSOC);
-  $nome = $linha['nome'];
+  if (isset($_SESSION['email'])) 
+  { 
+    $logado = $_SESSION['email'];
+    $script = 'SELECT * FROM usuarios WHERE email = "' . $logado . '"';
+    $consulta = $conexao->query($script);
+    $linha = $consulta->fetch_array(MYSQLI_ASSOC);
+    $nome = $linha['nome'];
+  }
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +74,7 @@
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisa" title="Type in a name">
       </form>
       <?php
-      if ($logado) {
+      if (isset($_SESSION['email'])) {
         echo '
         <div class="dropdown show" style="margin-right: 40px;">
           <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -80,8 +82,8 @@
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: red;">
-            <a class="dropdown-item" href="#">Meus Dados</a>
-            <a class="dropdown-item" id="deletarConta" href="#">Deletar Conta</a>
+            <a class="dropdown-item" href="usuario.php">Meus Dados</a>
+            <a class="dropdown-item" id="deletarConta" href="deletarConta.php">Deletar Conta</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>';
