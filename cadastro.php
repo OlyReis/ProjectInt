@@ -45,7 +45,7 @@ include("conexao.php");
 
     <h1 class="col-12">Cadastro</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" name="tTeste" method="POST" action="insert.php" onsubmit="validaSenhas()" >
+      <form class="needs-validation m-4" name="tTeste" method="POST" action="acaoCadastro.php" onsubmit="validaSenhas()" >
         <div class="form-row mb-2 mt-3">
           <label form="labelNome">*Campos Obrigatórios</label>
         </div>
