@@ -1,3 +1,30 @@
+<?php
+  include('conexao.php');
+
+  session_start();
+  if (isset($_SESSION['email'])) 
+  { 
+    $logado = $_SESSION['email'];
+    $script = 'SELECT * FROM usuarios WHERE email = "' . $logado . '"';
+    $consulta = $conexao->query($script);
+    $linha = $consulta->fetch_array(MYSQLI_ASSOC);
+    $nome = $linha['nome'];
+    $sobrenome = $linha['sobrenome'];
+    $data_nascimento = $linha['data'];
+    $sexo = $linha['sexo'];
+    $cpf = $linha['cpf'];
+    $cep = $linha['cep'];
+    $telefone = $linha['telefone'];
+    $endereco = $linha['endereco'];
+    $num_endereco = $linha['numero'];
+    $complemento = $linha['complemento'];
+    $cidade = $linha['cidade'];
+    $bairro = $linha['bairro'];
+    $estado = $linha['estado'];
+    $email = $linha['email'];
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,14 +62,12 @@
         <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
       </svg><span class="numItensCarrinho" name="numItensCarrinho">0</span><a>
         <div class="dropdown show mr-2">
-          <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Albert Smith
-          </a>
+          <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $nome; ?></a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: red;">
-            <a class="dropdown-item" href="#">Meus Dados</a>
+            <a class="dropdown-item" href="usuario.php">Meus Dados</a>
             <a class="dropdown-item" id="deletarConta" href="#">Deletar Conta</a>
-            <a class="dropdown-item" href="#">Logout</a>
+            <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>
       </div>
@@ -54,45 +79,59 @@
         <div class="form-row mb-3 mt-3">
           <div class="col">
             <label form="labelNome" class="mb-0">Nome</label> 
-            <input type="text" class="form-control input rounded-0 desabilitado"  name="nome" disabled="" >
+            <input type="text" class="form-control input rounded-0 desabilitado"  name="nome" disabled="" value="<?php echo $nome; ?>">
           </div>
           <div class="col">
             <label form="labelSobrenome" class="mb-0">Sobrenome</label> 
-            <input type="text" class="form-control input rounded-0 desabilitado"  name="sobrenome" disabled="">
+            <input type="text" class="form-control input rounded-0 desabilitado"  name="sobrenome" disabled="" value="<?php echo $sobrenome; ?>">
           </div>
         </div>
         <div class="form-row mb-3">
           <div class="col">
             <label form="labelDataNascimento">Data de Nascimento</label>
-            <input class="form-control input rounded-0 desabilitado" type="text"  name="data_nascimento" disabled="" >
+            <input class="form-control input rounded-0 desabilitado" type="text"  name="data_nascimento" disabled="" value="<?php echo $data_nascimento; ?>">
           </div>
+          
           <div class="col">
             <label form="labelSexo" class="mb-3">Sexo</label><br>
             <div class="form-check form-check-inline ml-3">
-              <input class="form-check-input desabilitado" id="validationCustomMasculino" type="radio" name="Sexo" id="SexoMasculino" value="optionMasculino" disabled="">
+              <input class="form-check-input desabilitado" type="radio" name="Sexo" id="SexoMasculino" value="Masculino" disabled="">
               <label class="form-check-label" for="RadioMasculino">Masculino</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input desabilitado" id="validationCustomMasculino" type="radio" name="Sexo" id="SexoFeminino" value="optionFeminino" disabled="">
+              <input class="form-check-input desabilitado" type="radio" name="Sexo" id="SexoFeminino" value="Feminino" disabled="">
               <label class="form-check-label" for="RadioFeminino">Feminino</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input desabilitado" type="radio" name="sexo" id="SexoOutro" value="Outro" disabled="">
+              <label class="form-check-label" for="RadioOutro">Outro</label>
             </div>
           </div>
         </div>
+        <?php            
+          if ($sexo == "Masculino") {
+            echo "<script> $('#SexoMasculino').attr('checked','checked') </script>";      
+          } else if ($sexo == "Feminino") {
+            echo "<script> $('#SexoFeminino').attr('checked','checked') </script>"; 
+          } else if ($sexo == "Outro") {
+            echo "<script> $('#SexoOutro').attr('checked','checked') </script>"; 
+          }
+        ?>
         <div class="form-row">
           <div class="col mb-3">
             <label form="labelCPF" class="mb-0">CPF</label>
-            <input type="text" class="form-control input rounded-0 desabilitado" name="cpf" disabled="">
+            <input type="text" class="form-control input rounded-0 desabilitado" name="cpf" disabled="" value="<?php echo $cpf; ?>">
           </div>
           <div class="col mb-3">
             <label form="labelCEP" class="mb-0">CEP</label> 
-            <input type="text" class="form-control input rounded-0" onkeydown="javascript: return event.keyCode == 69 ? false : true" onKeyPress="if(this.value.length==8) return false;"  name="cep" id="validationCustomCEP" pattern="([0-9]{8})" placeholder="Digite seu CEP" required>
+            <input type="text" class="form-control input rounded-0" onkeydown="javascript: return event.keyCode == 69 ? false : true" onKeyPress="if(this.value.length==8) return false;"  name="cep" id="validationCustomCEP" pattern="([0-9]{8})" placeholder="Digite seu CEP" value="<?php echo $cep; ?>" required>
             <div class="invalid-feedback" id="cepinvalido">
               Por favor insira um CEP válido.
             </div>
           </div>
           <div class="col mb-3">
             <label form="labelTelefone" class="mb-0">Telefone</label>
-            <input type="text" class="form-control input rounded-0 telefone" data-mask="(00) 0000-00009" id="telefone" name="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="Digite seu Telefone" required>
+            <input type="text" class="form-control input rounded-0 telefone" data-mask="(00) 0000-00009" id="telefone" name="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" placeholder="Digite seu Telefone" value="<?php echo $telefone; ?>" required>
             <div class="invalid-feedback">
               Por favor insira um Telefone válido.
             </div>
@@ -102,37 +141,37 @@
         <div class="form-row">
           <div class="col">
             <label form="labelNome" class="mb-0">Endereço</label> 
-            <input type="text" class="form-control input rounded-0" id="validationCustomEndereço"  name="endereco" placeholder="Digite seu Endereço" required>
+            <input type="text" class="form-control input rounded-0" id="validationCustomEndereço"  name="endereco" placeholder="Digite seu Endereço" value="<?php echo $endereco; ?>" required>
             <div class="invalid-feedback">
               Por favor insira um Endereço válido.
             </div>
           </div>
           <div class="col mt-4 col-sm-2">
-            <input type="number" class="form-control input rounded-0" id="validationCustomEndereçoNumero" onkeydown="javascript: return event.keyCode == 69 ? false : true"  name="num_endereco" placeholder="Nº" required>
+            <input type="number" class="form-control input rounded-0" id="validationCustomEndereçoNumero" onkeydown="javascript: return event.keyCode == 69 ? false : true"  name="num_endereco" placeholder="Nº" value="<?php echo $num_endereco; ?>" required>
           </div>
           <div class="col mt-4 col-sm-4">
-            <input type="text" class="form-control input rounded-0" id="validationCustomComplemento" name="complemento_endereco" placeholder="Complemento" required>
+            <input type="text" class="form-control input rounded-0" id="validationCustomComplemento" name="complemento_endereco" placeholder="Complemento" value="<?php echo $complemento; ?>" required>
           </div>
         </div>
 
         <div class="form-row">
           <div class="col mt-3">
             <label form="labelCidade" class="mb-0">Cidade</label> 
-            <input type="text" class="form-control input rounded-0" id="validationCustomCidade"  pattern="[a-zA-Z]+" name="cidade" placeholder="Digite sua Cidade" required>
+            <input type="text" class="form-control input rounded-0" id="validationCustomCidade"  pattern="[a-zA-Z]+" name="cidade" placeholder="Digite sua Cidade" value="<?php echo $cidade; ?>" required>
             <div class="invalid-feedback">
               Por favor insira uma Cidade válida.
             </div>
           </div>
           <div class="col mt-3">
             <label form="labelBairro" class="mb-0">Bairro</label> 
-            <input type="text" class="form-control input rounded-0" id="validationCustomBairro" name="bairro" placeholder="Digite seu Bairro" required>
+            <input type="text" class="form-control input rounded-0" id="validationCustomBairro" name="bairro" placeholder="Digite seu Bairro" value="<?php echo $bairro; ?>" required>
             <div class="invalid-feedback">
               Por favor insira um Bairro válido.
             </div>
           </div>
           <div class="col mt-3">
             <label form="labelBairro" class="mb-0">Estado</label> 
-            <input type="text" class="form-control input rounded-0" id="validationCustomBairro"  onKeyPress="if(this.value.length==2) return false;" pattern="[a-zA-Z]{2}" name="estado" placeholder="Digite seu Estado" required>
+            <input type="text" class="form-control input rounded-0" id="validationCustomBairro"  onKeyPress="if(this.value.length==2) return false;" pattern="[a-zA-Z]{2}" name="estado" placeholder="Digite seu Estado" value="<?php echo $estado; ?>" required>
             <div class="invalid-feedback">
               Por favor insira um Estado válido.
             </div>
@@ -141,7 +180,7 @@
         <div class="form-row mb-3 mt-3">
           <div class="col">
             <label for="labelEmail" class="mb-0">Email</label>
-            <input type="email" class="form-control input rounded-0 desabilitado" disabled="">
+            <input type="email" class="form-control input rounded-0 desabilitado" disabled="" value="<?php echo $email; ?>">
           </div>
         </div>
 
