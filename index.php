@@ -9,6 +9,7 @@
     $consulta = $conexao->query($script);
     $linha = $consulta->fetch_array(MYSQLI_ASSOC);
     $nome = $linha['nome'];
+    $adm = $linha['adm'];
   }
 ?>
 
@@ -97,6 +98,18 @@
       ?>
     </div>
   </nav>
+
+  <?php
+  if (isset($_SESSION['email'])) {
+    if ($adm != 0) {
+      echo '
+  <div class="row mb-3 w-50 mx-auto">
+    <a href="addProduto.php" class="col text-light btn btn-sm btn-rounded font-weight-bold mr-3 btnADM" style="line-height: 30px;" type="button"> Adicionar Produto</a>
+    <a href="indexAlterarProduto.php" class="col text-light btn btn-sm btn-rounded font-weight-bold btnADM" style="line-height: 30px;" type="button"> Alterar Produto</a>   
+  </div>';
+    }
+  }
+  ?>
 
   <table>
     <tbody id="myTable">
