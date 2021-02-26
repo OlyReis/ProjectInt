@@ -113,7 +113,6 @@
   $script = "SELECT * FROM produtos";
 
   $consulta = $conexao->query($script);
-  echo "<br>";
 
   if (!$consulta) {
     echo "Deu erro!";
@@ -126,7 +125,7 @@
     if ($total > 0) { 
       echo '
       <table>
-        <tbody id="myTable">;';
+        <tbody id="myTable">';
           
       while ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
         $id = $linha['id'];
@@ -135,8 +134,6 @@
         $foto = $linha['foto'];
 
   echo '
-
-  
       <tr>
         <td>
           <div class="card" style="width: 18rem; margin: 10px;">
@@ -150,10 +147,10 @@
           <p class="card-text text-danger text-justify">' . $descricaoMenu . '</p>
           <button type="button" class="btn darkmode-ignore btnVerMais"><a href="paginaProduto.php?id=' . $id . '" name="1">Ver mais...</a></button>
         </td>
-      </tr>';}
+      </tr>'; }
     echo '
       </tbody>
-    </table>';}}
+    </table>'; }}
   ?>
 
   <footer class=" py-5">
