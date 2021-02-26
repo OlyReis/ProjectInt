@@ -109,222 +109,52 @@
   </div>';
     }
   }
-  ?>
+  
+  $script = "SELECT * FROM produtos";
 
-  <table>
-    <tbody id="myTable">
+  $consulta = $conexao->query($script);
+  echo "<br>";
+
+  if (!$consulta) {
+    echo "Deu erro!";
+    echo $conexao->error;
+  } else {
+    $total = $consulta->num_rows;
+    $i = 0;
+    $primeiraLinha = true;
+
+    if ($total > 0) { 
+      echo '
+      <table>
+        <tbody id="myTable">;';
+          
+      while ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
+        $id = $linha['id'];
+        $nome = $linha['nome'];
+        $descricaoMenu = $linha['descricaoM'];
+        $foto = $linha['foto'];
+
+  echo '
+
+  
       <tr>
         <td>
           <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/1.webp" alt="Card image cap">
+            <img class="card-img-top" src="' . $foto . '" alt="Card image cap">
             <div class="card-body">
             </div>
           </div>
         </td>
         <td>
-          <h5 class="card-title text-primary text-justify">Tênis</h5>
-          <p class="card-text text-danger text-justify">Perfeito para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="id361614.php" name="1">Ver mais...</a></button>
+          <h5 class="card-title text-primary text-justify">' . $nome . '</h5>
+          <p class="card-text text-danger text-justify">' . $descricaoMenu . '</p>
+          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="paginaProduto.php?id=' . $id . '" name="1">Ver mais...</a></button>
         </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/1.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Sapato</h5>
-          <p class="card-text text-danger text-justify">Perfeito para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/2.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Sapato</h5>
-          <p class="card-text text-danger text-justify">Perfeito para diversas ocasiões.</p>  
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/3.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Sapato</h5>
-          <p class="card-text text-danger text-justify">Perfeito para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/4.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Salto alto</h5>
-          <p class="card-text text-danger text-justify">Perfeito para eventos sociais e trabalho.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/5.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Salto alto</h5>
-          <p class="card-text text-danger text-justify">Perfeito para eventos sociais e trabalho.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/6.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Kit bolsa</h5>
-          <p class="card-text text-danger text-justify">Diferentes modelos para diferentes momentos.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/7.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Bolsa</h5>
-          <p class="card-text text-danger text-justify">Perfeita para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/8.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Vestido</h5>
-          <p class="card-text text-danger text-justify">Perfeito para passeios.</p>        
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/9.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Calça feminina</h5>
-          <p class="card-text text-danger text-justify">Perfeita para passeios.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/10.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Calça jeans feminina</h5>
-          <p class="card-text text-danger text-justify">Perfeita para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/11.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Saia vermelha</h5>
-          <p class="card-text text-danger text-justify">Perfeita para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/12.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Vestido Marrom</h5>
-          <p class="card-text text-danger text-justify">Perfeito para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/13.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Calça jeans masculina</h5>
-          <p class="card-text text-danger text-justify">Perfeita para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/14.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Camisas masculinas</h5>
-          <p class="card-text text-danger text-justify">Perfeitas para diversas ocasiões.<br>Disponível em diversas cores.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="idxxxxx.php">Ver mais...</a></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      </tr>';}
+    echo '
+      </tbody>
+    </table>';}}
+  ?>
 
   <footer class=" py-5">
     <div class="row">
