@@ -44,7 +44,7 @@
 
     <h1 class="col-12">Adicionar Produto</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" method="" enctype="multipart/form-data" action="insertProduto.php">
+      <form class="needs-validation m-4" method="POST" enctype="multipart/form-data" action="insertProduto.php">
         <div class="form-row mb-3 mt-3">
           <div class="col">
             <label form="labelNomeProduto" class="mb-0">Nome do Produto</label> 
@@ -105,7 +105,7 @@
         </div>
         <div class="form-row mb-3 mt-0">
           <div class="col mb-3" id="imgProduto">
-            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="foto" required>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="fotoProduto" required>
             <div class="invalid-feedback mb-3">Por favor insira uma imagem válida.</div>
           </div>
         </div>
