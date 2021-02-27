@@ -140,7 +140,7 @@ if (isset($_SESSION['email']))
           </div>
         </td>
         <td>
-          <h5 class="card-title text-primary text-justify">' . $nome . '</h5>
+          <h5 class="card-title text-primary text-justify">' . $nomeP . '</h5>
           <p class="card-text text-danger text-justify">' . $descricaoMenu . '</p>
           <button type="button" class="btn darkmode-ignore btnAlterarProduto"><a href="alterarProduto.php?id=' . $id . '" name="1">Alterar Dados Produto</a></button>
         </td>
