@@ -24,6 +24,7 @@ if (isset($_SESSION['email']))
   }
 
 $id = $_GET['id'];
+$_SESSION['id']=$id;
 $script = "SELECT * FROM produtos WHERE id = $id";
 
 $consulta = $conexao->query($script);
@@ -117,7 +118,7 @@ if (!$consulta) {
 
   <h1 class="col-12">Alterar Produto</h1><br>
   <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-    <form class="needs-validation m-4" method="POST" action="acaoAlteraProduto" enctype="multipart/form-data">
+    <form class="needs-validation m-4" method="POST" action="acaoAlterarProduto.php" enctype="multipart/form-data">
       <div class="form-row mb-3 mt-3">
         <div class="col">
           <label form="labelNomeProduto" class="mb-0">Nome do Produto</label> 
@@ -128,7 +129,7 @@ if (!$consulta) {
         </div>
         <div class="col">
           <label form="labelLancamento" class="mb-0">Ano de Lançamento</label> 
-          <input type="text" class="form-control input rounded-0" onkeydown="javascript: return event.keyCode == 69 ? false : true" onKeyPress="if(this.value.length==4) return false;"  placeholder="*Digite um novo Ano de Lançamento do Produto" name="lancamentoProduto" id="lancamentoProduto" pattern="([0-9]{4})" value="<?php echo $anoLancamento; ?>" required>
+          <input type="text" class="form-control input rounded-0" onkeydown="javascript: return event.keyCode == 69 ? false : true" onKeyPress="if(this.value.length==4) return false;"  placeholder="*Digite um novo Ano de Lançamento do Produto" name="anoLancamento" id="lancamentoProduto" pattern="([0-9]{4})" value="<?php echo $anoLancamento; ?>" required>
           <div class="invalid-feedback">
             Por Favor insira um ano válido.
           </div>
@@ -153,7 +154,7 @@ if (!$consulta) {
         </div>
         <div class="col mt-0">
           <label form="labelEstoqueProduto" class="mb-0">Estoques do Produto</label>
-          <input type="number" class="form-control input rounded-0 mt-0" id="estoqueProduto" onkeydown="javascript: return event.keyCode == 69 ? false : true" placeholder="Digite um novo Estoque do Produto" name="precoProduto" value="<?php echo $quantidadeProduto; ?>" required>
+          <input type="number" class="form-control input rounded-0 mt-0" id="estoqueProduto" onkeydown="javascript: return event.keyCode == 69 ? false : true" placeholder="Digite um novo Estoque do Produto" name="qtd" value="<?php echo $quantidadeProduto; ?>" required>
           <div class="invalid-feedback">
             Por favor insira um número válido.
           </div>
@@ -176,7 +177,7 @@ if (!$consulta) {
       </div>
       <div class="form-row mb-3 mt-0">
         <div class="col mb-3" id="imgProduto">
-          <input type="file" class="form-control-file" id="exampleFormControlFile1" required>
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" name="fotoProduto" required>
           <div class="invalid-feedback mb-3">Por favor insira uma imagem válida.</div>
         </div>
       </div>
@@ -190,7 +191,7 @@ if (!$consulta) {
           <div class="valid-feedback" style="border-top: 2px solid green"></div>        
         </div>
       </div>
-      <button class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnAdicionarProduto" type="submit">Alterar Produto</button>
+      <input type="submit" name="Alterar"class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnAdicionarProduto" value="Alterar dados Produto">
     </form>
   </div>
 
