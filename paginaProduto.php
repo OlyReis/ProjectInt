@@ -40,7 +40,7 @@
     $preco = str_replace(".", ",", $preco);
     $qtd = $linha['qtd'];
     $foto = $linha['foto'];
-    $descricaoP = $linha['descricaoP'];
+    $descricaoP = html_entity_decode($linha['descricaoP']);
   }
 ?>
 
