@@ -10,6 +10,17 @@
     $linha = $consulta->fetch_array(MYSQLI_ASSOC);
     $nome = $linha['nome'];
     $adm = $linha['adm'];
+  
+    if (isset($_SESSION['nItensCarrinho'])) {
+      $nItensCarrinho = $_SESSION['nItensCarrinho'];
+    } else {
+      $_SESSION['nItensCarrinho'] = 0;
+      $nItensCarrinho = $_SESSION['nItensCarrinho'];
+    }
+
+  } else {
+    $_SESSION['nItensCarrinho'] = 0;
+    $nItensCarrinho = $_SESSION['nItensCarrinho'];
   }
 
   $id = $_GET['id'];
@@ -23,7 +34,7 @@
   } else {
     $linha = $consulta->fetch_array(MYSQLI_ASSOC);
     $id = $linha['id'];
-    $nome = $linha['nome'];
+    $nomeProduto = $linha['nome'];
     $anoLancamento = $linha['anoLancamento'];
     $preco = $linha['preco'];
     $preco = str_replace(".", ",", $preco);
@@ -66,7 +77,7 @@
       </ul>
       <a href="carrinho.php" class="mr-3"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-      </svg><span class="numItensCarrinho" id="numItensCarrinho" name="numItensCarrinho">0</span><a>
+      </svg><span class="numItensCarrinho" id="numItensCarrinho" name="numItensCarrinho"><?php echo $nItensCarrinho; ?></span><a>
       <?php
       if (isset($_SESSION['email'])) {
         echo '
@@ -100,12 +111,12 @@
           </div>
           <div class="col-md-8">
             <div>
-              <h1 class="text-light mb-0"><?php echo $nome; ?></h1>
+              <h1 class="text-light mb-0"><?php echo $nomeProduto; ?></h1>
               <p class="text-light mt-0 ml-1">Ano de lançamento: <?php echo $anoLancamento; ?></p>
               <h2 class="text-light mb-0">Preço: R$ <?php echo $preco; ?></h2>
               <p class="mb-4 text-light mt-0 ml-1" name="numEstoque">Estoque: <?php echo $qtd; ?></p>
               <a class="btn btn-dark text-light mb-4" href="carrinho.php" role="button" id="comprarProduto" style="bottom: 0; position: absolute;">Comprar</a> 
-              <a class="btn btn-dark mb-4" href="acaoAdicionarAoCarrinho.php" role="button" id="adicionarCarrinho" style="bottom: 0; position: absolute; left: 120px;">Adicionar ao carrinho</a>
+              <a class="btn btn-dark mb-4" href="acaoAdicionarAoCarrinho.php?id=<?=$id?>" role="button" id="adicionarCarrinho" style="bottom: 0; position: absolute; left: 120px;">Adicionar ao carrinho</a>
             </div>
           </div>
         </div>
@@ -180,7 +191,6 @@
     <script>
       new Darkmode().showWidget();
     </script>
-    <script type="text/javascript" src="JS/idProdutos.js"></script>
     <script type="JS/Bootstrap.mim.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
