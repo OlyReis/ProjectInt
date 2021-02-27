@@ -217,7 +217,7 @@ if (!$consulta) {
   <script>
     new Darkmode().showWidget();
   </script>
-  <script type="text/javascript" src="JS/alterarProduto.js"></script>
+  <script type="text/javascript" src="JS/alterarProdut.js"></script>
   <script type="JS/Bootstrap.mim.js"></script>
   <script src="JS/jquery.maskMoney.js" type="text/javascript"></script>
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
