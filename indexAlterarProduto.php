@@ -127,10 +127,9 @@ if (isset($_SESSION['email']))
           
       while ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
         $id = $linha['id'];
-        $nome = $linha['nome'];
+        $nomeP = $linha['nome'];
         $descricaoMenu = $linha['descricaoM'];
         $foto = $linha['foto'];
-
   echo '
       <tr>
         <td>
@@ -143,7 +142,7 @@ if (isset($_SESSION['email']))
         <td>
           <h5 class="card-title text-primary text-justify">' . $nome . '</h5>
           <p class="card-text text-danger text-justify">' . $descricaoMenu . '</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php?id=' . $id . '" name="1">Alterar Dados Produto</a></button>
+          <button type="button" class="btn darkmode-ignore btnAlterarProduto"><a href="alterarProduto.php?id=' . $id . '" name="1">Alterar Dados Produto</a></button>
         </td>
       </tr>'; }
     echo '
@@ -159,9 +158,9 @@ if (isset($_SESSION['email']))
         <h5>Sobre Nós</h5>
         <ul class="list-unstyled text-small">
           <li><a href="sobre.php#SD">Informações da Empresa</a></li>
-          <li><a href="sobre.php">Informações dos Desenvolvedores do Site</a></li
+          <li><a href="sobre.php">Informações dos Desenvolvedores do Site</a></li>
           </ul>
-  
+
         </div>
         <div class="col- col-6 col-md">
           <h5>Contato</h5>
