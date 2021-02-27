@@ -5,18 +5,7 @@ function inserir($conexao,$destino,$nomeProduto,$lancamentoProduto,$descricaoPro
 	
 	$script = 'INSERT INTO produtos VALUES (DEFAULT, "' . $nomeProduto . '", "' . $lancamentoProduto . '", "' . $descricaoProdutoMenu . '","' . $precoProduto .'","' . $estoqueProduto .'","' . $numTamanhos .'","' . $tamanhosProduto .'","' . $destino . '","' . $descricaoProduto .'")';
 
-$insere = $conexao->query($script);
-
-if(!$insere){
-	echo "<br>Inserção incorreta! Deu erro!<br>";
-	echo $conexao->error;
-	echo "<br><br>";
-	echo $script;
-	echo "<br>";
-}else{
-	echo "<br>Inserção Realizada corretamente!";
-}
-	/*$insere = $conexao->query($script);
+	$insere = $conexao->query($script);
 	if(!$insere){
 		echo "<br>Inserção incorreta! Deu erro!<br>";
 		echo $conexao->error;
@@ -29,7 +18,7 @@ if(!$insere){
 		echo "<br>Inserção Realizada corretamente!";
 		echo '<script>alert("Cadastro feito com sucesso!")</script>';
 		echo '<script>window.location="addProduto.php"</script>';
-	}*/
+	}
 }
 
 
@@ -40,7 +29,7 @@ $precoProduto=$_POST['precoProduto'];
 $estoqueProduto=$_POST['estoqueProduto']; 
 $numTamanhos=$_POST['numTamanhos'];
 $tamanhosProduto=$_POST['tamanhosProduto'];
-$descricaoProduto=$_POST['descricaoProduto'];
+$descricaoProduto = htmlentities($_POST['descricaoProduto']);
 
 $dir= "img/";
 $file= $_FILES['fotoProduto'];
@@ -50,4 +39,5 @@ move_uploaded_file($file['tmp_name'], $destino);
 
 inserir($conexao,$destino,$nomeProduto,$lancamentoProduto,$descricaoProdutoMenu,$precoProduto,$estoqueProduto,$numTamanhos,$tamanhosProduto,$descricaoProduto);
 
+echo  html_entity_decode($descricaoProduto);
 ?>
