@@ -9,6 +9,19 @@
     $consulta = $conexao->query($script);
     $linha = $consulta->fetch_array(MYSQLI_ASSOC);
     $nome = $linha['nome'];
+
+    if (isset($_SESSION['nItensCarrinho'])) {
+      $nItensCarrinho = $_SESSION['nItensCarrinho'];
+      $idsCarrinho = $_SESSION['idsCarrinho'];
+      $idCadaProdutoCarrinho = explode(",", $idsCarrinho);
+    } else {
+      $_SESSION['nItensCarrinho'] = 0;
+      $nItensCarrinho = $_SESSION['nItensCarrinho'];
+    }
+
+  } else {
+    $_SESSION['nItensCarrinho'] = 0;
+    $nItensCarrinho = $_SESSION['nItensCarrinho'];
   }
 ?>
 
@@ -46,7 +59,7 @@
       </ul>
       <a href="carrinho.php" class="mr-3"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-      </svg><span class="numItensCarrinho" name="numItensCarrinho">0</span><a>
+      </svg><span class="numItensCarrinho" name="numItensCarrinho"><?php echo $nItensCarrinho; ?></span><a>
       <?php
       if (isset($_SESSION['email'])) {
         echo '
@@ -130,14 +143,31 @@
       <div class="row">
         <div class="col-sm-6">
           <h3 class="col-12 mb-4">Meu Carrinho</h3>
+          <?php 
+            for ($i = 0; $i < count($idCadaProdutoCarrinho)-1; $i++) { 
+              $script = "SELECT * FROM produtos WHERE id = $idCadaProdutoCarrinho[$i]";
+
+              $consulta = $conexao->query($script);
+
+              
+                $linha = $consulta->fetch_array(MYSQLI_ASSOC);
+                $nome = $linha['nome'];
+                $foto = $linha['foto'];
+                $estoque = $linha['qtd'];
+                $preco = $linha['preco'];
+                $tamanhos = $linha['tamanho'];                
+                $tamanhos = explode(",", $tamanhos);
+                echo $tamanhos[0];
+              
+              echo '
           <div class="divProdutoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
             <div class="row mb-0">
               <div class="col-sm-4 ml-0 mt-0">
-                <a href="id361614.php"><img src="IMG/1.webp" class="w-100 h-100" alt="..."></a>
+                <a href="paginaProduto.php?id=' . $idCadaProdutoCarrinho[$i] . '"><img src="' . $foto . '" class="w-100 h-100" alt="..."></a>
               </div>
               <div class="col-md-8 mb-0">
-                <h3 class="mb-0 text-light">Tênis</h3>
-                <p class="text-light ml-1" id="numEstoque" name="numEstoque">Estoque: 5 </p>
+                <h3 class="mb-0 text-light">' . $nome . '</h3>
+                <p class="text-light ml-1" id="numEstoque" name="numEstoque">Estoque: ' . $estoque . '</p>
                 <p class=" mt-0 ml-1 text-light">Entregue por Modas Z</p>
               </div>
               <div class="mt-1" style="margin-left: 96%; position:absolute;">
@@ -166,20 +196,15 @@
               <div class="col-sm-5">
                 <input list="tamanhoProduto" name="tamanhosProduto" id="tamanhosProduto" style="width: 60px;">
                 <datalist id="tamanhoProduto">
-                  <option value="38">
-                  <option value="39">
-                  <option value="40">
-                  <option value="41">
-                  <option value="42">
-                  <option value="43">
-                  <option value="44">
+                  <option value="' . $tamanhos[0] . '">
                 </datalist>
               </div>
                <div class="col text-light">
-                <h4 id="valorProduto">R$ 68,90</h4>
+                <h4 id="valorProduto">R$ ' . $preco . '</h4>
               </div>
             </div>
-          </div>    
+          </div>'; }
+          ?> 
         </div>
 
         <div class="col-sm-6">
