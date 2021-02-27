@@ -115,8 +115,8 @@
               <p class="text-light mt-0 ml-1">Ano de lançamento: <?php echo $anoLancamento; ?></p>
               <h2 class="text-light mb-0">Preço: R$ <?php echo $preco; ?></h2>
               <p class="mb-4 text-light mt-0 ml-1" name="numEstoque">Estoque: <?php echo $qtd; ?></p>
-              <a class="btn btn-dark text-light mb-4" href="carrinho.php" role="button" id="comprarProduto" style="bottom: 0; position: absolute;">Comprar</a> 
-              <a class="btn btn-dark mb-4" href="acaoAdicionarAoCarrinho.php?id=<?=$id?>" role="button" id="adicionarCarrinho" style="bottom: 0; position: absolute; left: 120px;">Adicionar ao carrinho</a>
+              <a class="btn btn-dark text-light mb-4" href="carrinho.php" role="button" id="comprarProduto" style="bottom: 0; position: absolute; margin-left: 260px;">Comprar</a> 
+              <a class="btn btn-dark mb-4" href="acaoAdicionarAoCarrinho.php?id=<?=$id?>&estoque=<?=$qtd?>" role="button" id="adicionarCarrinho" style="bottom: 0; position: absolute; margin-left: 360px;">Adicionar ao carrinho</a>
             </div>
           </div>
         </div>
