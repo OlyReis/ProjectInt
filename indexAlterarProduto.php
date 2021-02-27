@@ -1,3 +1,17 @@
+<?php
+include('conexao.php');
+
+session_start();
+if (isset($_SESSION['email'])) 
+{ 
+  $logado = $_SESSION['email'];
+  $script = 'SELECT * FROM usuarios WHERE email = "' . $logado . '"';
+  $consulta = $conexao->query($script);
+  $linha = $consulta->fetch_array(MYSQLI_ASSOC);
+  $nome = $linha['nome'];
+  $adm = $linha['adm'];
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,232 +72,84 @@
       <form class="form-inline my-2 my-lg-0 mr-3">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisa" title="Type in a name">
       </form>
-      <button type="button" class="btn btn-dark"><a href="login.php">Login<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-square ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <?php
+      if (isset($_SESSION['email'])) {
+        echo '
+        <div class="dropdown show" style="margin-right: 65px;">
+        <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        ' . $nome . '
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: red;">
+        <a class="dropdown-item" href="usuario.php">Meus Dados</a>
+        <a class="dropdown-item" id="deletarConta" href="deletarConta.php">Deletar Conta</a>
+        <a class="dropdown-item" href="logout.php">Logout</a>
+        </div>
+        </div>';
+      } else {
+        echo '
+        <button type="button" class="btn btn-dark"><a href="login.php">Login<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-square ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
         <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-      </svg></a></button>
+        </svg></a></button>';
+      }
+      ?>
     </div>
   </nav>
 
+ <?php
+  if (isset($_SESSION['email'])) {
+    if ($adm != 0) {
+      echo '
   <div class="row mb-3 w-50 mx-auto">
     <a href="addProduto.php" class="col text-light btn btn-sm btn-rounded font-weight-bold mr-3 btnADM" style="line-height: 30px;" type="button"> Adicionar Produto</a>
     <a href="indexAlterarProduto.php" class="col text-light btn btn-sm btn-rounded font-weight-bold btnADM" style="line-height: 30px;" type="button"> Alterar Produto</a>   
-  </div>
+  </div>';
+    }
+  }
+  
+  $script = "SELECT * FROM produtos";
 
-  <table>
-    <tbody id="myTable">
+  $consulta = $conexao->query($script);
+
+  if (!$consulta) {
+    echo "Deu erro!";
+    echo $conexao->error;
+  } else {
+    $total = $consulta->num_rows;
+    $i = 0;
+    $primeiraLinha = true;
+
+    if ($total > 0) { 
+      echo '
+      <table>
+        <tbody id="myTable">';
+          
+      while ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
+        $id = $linha['id'];
+        $nome = $linha['nome'];
+        $descricaoMenu = $linha['descricaoM'];
+        $foto = $linha['foto'];
+
+  echo '
       <tr>
         <td>
           <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/1.webp" alt="Card image cap">
+            <img class="card-img-top" src="' . $foto . '" alt="Card image cap">
             <div class="card-body">
             </div>
           </div>
         </td>
         <td>
-          <h5 class="card-title text-primary text-justify">Tênis</h5>
-          <p class="card-text text-danger text-justify">Perfeito para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php" name="1">Alterar</a></button>
+          <h5 class="card-title text-primary text-justify">' . $nome . '</h5>
+          <p class="card-text text-danger text-justify">' . $descricaoMenu . '</p>
+          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php?id=' . $id . '" name="1">Alterar Dados Produto</a></button>
         </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/1.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Sapato</h5>
-          <p class="card-text text-danger text-justify">Perfeito para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/2.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Sapato</h5>
-          <p class="card-text text-danger text-justify">Perfeito para diversas ocasiões.</p>  
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/3.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Sapato</h5>
-          <p class="card-text text-danger text-justify">Perfeito para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/4.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Salto alto</h5>
-          <p class="card-text text-danger text-justify">Perfeito para eventos sociais e trabalho.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/5.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Salto alto</h5>
-          <p class="card-text text-danger text-justify">Perfeito para eventos sociais e trabalho.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/6.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Kit bolsa</h5>
-          <p class="card-text text-danger text-justify">Diferentes modelos para diferentes momentos.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/7.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Bolsa</h5>
-          <p class="card-text text-danger text-justify">Perfeita para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/8.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Vestido</h5>
-          <p class="card-text text-danger text-justify">Perfeito para passeios.</p>        
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/9.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Calça feminina</h5>
-          <p class="card-text text-danger text-justify">Perfeita para passeios.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/10.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Calça jeans feminina</h5>
-          <p class="card-text text-danger text-justify">Perfeita para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/11.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Saia vermelha</h5>
-          <p class="card-text text-danger text-justify">Perfeita para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/12.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Vestido Marrom</h5>
-          <p class="card-text text-danger text-justify">Perfeito para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/13.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Calça jeans masculina</h5>
-          <p class="card-text text-danger text-justify">Perfeita para diversas ocasiões.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="card" style="width: 18rem; margin: 10px;">
-            <img class="card-img-top" src="IMG/14.jpg" alt="Card image cap">
-            <div class="card-body">
-            </div>
-          </div>
-        </td>
-        <td>
-          <h5 class="card-title text-primary text-justify">Camisas masculinas</h5>
-          <p class="card-text text-danger text-justify">Perfeitas para diversas ocasiões.<br>Disponível em diversas cores.</p>
-          <button type="button" class="btn darkmode-ignore btnVerMais"><a href="alterarProduto.php">Alterar</a></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      </tr>'; }
+    echo '
+      </tbody>
+    </table>'; }}
+  ?>
   <footer class=" py-5">
     <div class="row">
       <div class="col- col-12 col-md">
@@ -295,6 +161,7 @@
           <li><a href="sobre.php#SD">Informações da Empresa</a></li>
           <li><a href="sobre.php">Informações dos Desenvolvedores do Site</a></li
           </ul>
+  
         </div>
         <div class="col- col-6 col-md">
           <h5>Contato</h5>
