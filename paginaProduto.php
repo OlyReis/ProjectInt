@@ -115,7 +115,7 @@
               <p class="text-light mt-0 ml-1">Ano de lançamento: <?php echo $anoLancamento; ?></p>
               <h2 class="text-light mb-0">Preço: R$ <?php echo $preco; ?></h2>
               <p class="mb-4 text-light mt-0 ml-1" name="numEstoque">Estoque: <?php echo $qtd; ?></p>
-              <a class="btn btn-dark text-light mb-4" href="carrinho.php" role="button" id="comprarProduto" style="bottom: 0; position: absolute; margin-left: 260px;">Comprar</a> 
+              <a class="btn btn-dark text-light mb-4" href="acaoAdicionarAoCarrinho.php?id=<?=$id?>&estoque=<?=$qtd?>&botaoComprar=sim" role="button" id="comprarProduto" style="bottom: 0; position: absolute; margin-left: 260px;">Comprar</a> 
               <a class="btn btn-dark mb-4" href="acaoAdicionarAoCarrinho.php?id=<?=$id?>&estoque=<?=$qtd?>" role="button" id="adicionarCarrinho" style="bottom: 0; position: absolute; margin-left: 360px;">Adicionar ao carrinho</a>
             </div>
           </div>
@@ -130,32 +130,72 @@
       <h2 class="darkmode-ignore" style="color: #A90808;">Outros produtos Modas Z</h2>
       <br>
 
-      <div id="carouselExampleIndicators darkmode-ignore" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <a href="idxxxxx.php"><img src="IMG/2.jpg" class="d-block mx-auto w-50" alt="..."></a>
-          </div>
-          <div class="carousel-item">
-            <a href="idxxxxx.php"><img src="IMG/3.jpg" class="d-block mx-auto w-50" alt="..."></a>
-          </div>
-          <div class="carousel-item">
-            <a href="idxxxxx.php"><img src="IMG/4.jpg" class="d-block mx-auto w-50" alt="..."></a>
-          </div>
+          <?php 
+          $script = "SELECT * FROM produtos";
+
+          $consulta = $conexao->query($script);
+
+          if (!$consulta) {
+            echo "Deu erro!";
+            echo $conexao->error;
+          } else {
+            $numDados = $consulta->num_rows;
+            $primeiraLinha = true;
+            if ($numDados < 6) {
+              $maxVisualizacoes = $numDados-1;
+            } else {
+              $maxVisualizacoes = 5;
+            }
+
+            $idJaEscolhido[1] = '';
+
+            for ($i = 1; $i <= $maxVisualizacoes; $i++) {
+
+              $idAleatorio = mt_rand(1, $numDados);
+
+              if ($numDados >= 2) {             
+                  while ((in_array($idAleatorio, $idJaEscolhido)) || ($idAleatorio == $id)) {
+                    $idAleatorio = mt_rand(1, $numDados);                  
+                }
+              }
+
+              $idJaEscolhido[$i] = $idAleatorio;
+
+              $script = "SELECT * FROM produtos WHERE id =" . $idAleatorio;
+
+              $consulta = $conexao->query($script);
+               
+              $linha = $consulta->fetch_array(MYSQLI_ASSOC);
+              $foto = $linha['foto'];
+
+              if ($primeiraLinha) {
+                echo '
+              <div class="carousel-item active">
+                <a href="paginaProduto.php?id=' . $idAleatorio . '"><img class="d-block w-100" src="' . $foto . '" alt="First slide" style="width: 100px; height: 450px;"></a>
+              </div>';
+                $primeiraLinha = false;
+              } else {
+                echo '
+              <div class="carousel-item">
+                <a href="paginaProduto.php?id=' . $idAleatorio . '"><img class="d-block w-100" src="' . $foto . '" alt="First slide" style="width: 100px; height: 450px;"></a>
+              </div>';
+              }       
+            }
+          }
+        ?>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only bg-dark">Previous</span>
+          <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
       </div>
+
     </div>
     <footer class=" py-5">
       <div class="row">
