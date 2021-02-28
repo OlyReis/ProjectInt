@@ -142,7 +142,8 @@ if (isset($_SESSION['email']))
         <td>
           <h5 class="card-title text-primary text-justify">' . $nomeP . '</h5>
           <p class="card-text text-danger text-justify">' . $descricaoMenu . '</p>
-          <button type="button" class="btn darkmode-ignore btnAlterarProduto"><a href="alterarProduto.php?id=' . $id . '" name="1">Alterar Dados Produto</a></button>
+          <button type="button" class="btn darkmode-ignore btnAlterarProduto font-weight-bold" style="background-color: #A90808;"><a href="alterarProduto.php?id=' . $id . '" style="color: white;">Alterar Dados</a></button>
+          <button type="button" class="btn darkmode-ignore btnAlterarProduto font-weight-bold" style="background-color: #A90808;"><a href="acaoExcluirProduto.php?id=' . $id . '&nome=' . $nomeP . '" style="color: white;">Excluir</a></button>
         </td>
       </tr>'; }
     echo '
