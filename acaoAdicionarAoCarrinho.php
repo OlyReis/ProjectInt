@@ -6,11 +6,16 @@
   { 
     $id = $_GET['id'];
     $estoque = $_GET['estoque'];
+    $botaoComprar = $_GET['botaoComprar'];
 
     if (strpos($_SESSION['idsCarrinho'], $id) !== false) {
-      echo "Já existe no carrinho";
-      echo '<script> alert("Produto já adicionado ao carrinho."); </script>';
-      echo '<script> window.location = "paginaProduto.php?id=' . $id . '"; </script>';
+      if ($botaoComprar == "sim") {
+        echo '<script> window.location = "carrinho.php"; </script>';
+      } else {
+        echo "Já existe no carrinho";
+        echo '<script> alert("Produto já adicionado ao carrinho."); </script>';
+        echo '<script> window.location = "paginaProduto.php?id=' . $id . '"; </script>';
+      }
     } else {
       if ($estoque == 0) {
         echo '<script> alert("Produto com 0 de estoque."); </script>';
@@ -19,7 +24,11 @@
         $_SESSION['nItensCarrinho'] += 1;
         $_SESSION['idsCarrinho'] = $_SESSION['idsCarrinho'] . $id . ",";
         echo $_SESSION['idsCarrinho'];
-        echo '<script> window.location = "paginaProduto.php?id=' . $id . '"; </script>';
+        if ($botaoComprar == "sim") {
+          echo '<script> window.location = "carrinho.php"; </script>';
+        } else {
+          echo '<script> window.location = "paginaProduto.php?id=' . $id . '"; </script>';
+        }
       }
     }
   } else {
