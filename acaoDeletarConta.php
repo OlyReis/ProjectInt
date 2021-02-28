@@ -18,6 +18,10 @@
       $script = 'DELETE FROM usuarios WHERE id = "' . $id . '"';
       $deleta = $conexao->query($script);
       if ($deleta) {
+        $script = "SET @count = 0";
+        $consulta = $conexao->query($script);
+        $script = "UPDATE `usuarios` SET `usuarios`.`id` = @count:= @count + 1";
+        $consulta = $conexao->query($script);
         session_destroy();
         unset($_SESSION['email']);
         unset($_SESSION['senha']);
