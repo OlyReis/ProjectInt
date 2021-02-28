@@ -40,6 +40,7 @@
     $preco = str_replace(".", ",", $preco);
     $qtd = $linha['qtd'];
     $foto = $linha['foto'];
+    $tamanhos = $linha['tamanho'];
     $descricaoP = html_entity_decode($linha['descricaoP']);
   }
 ?>
@@ -114,6 +115,7 @@
               <h1 class="text-light mb-0"><?php echo $nomeProduto; ?></h1>
               <p class="text-light mt-0 ml-1">Ano de lançamento: <?php echo $anoLancamento; ?></p>
               <h2 class="text-light mb-0">Preço: R$ <?php echo $preco; ?></h2>
+              <p class="mb-0 text-light mt-0 ml-1" name="Tamanho">Tamanhos Disponíveis: <?php echo str_replace(",",", ",$tamanhos); ?></p>
               <p class="mb-4 text-light mt-0 ml-1" name="numEstoque">Estoque: <?php echo $qtd; ?></p>
               <a class="btn btn-dark text-light mb-4" href="acaoAdicionarAoCarrinho.php?id=<?=$id?>&estoque=<?=$qtd?>&botaoComprar=sim" role="button" id="comprarProduto" style="bottom: 0; position: absolute; margin-left: 260px;">Comprar</a> 
               <a class="btn btn-dark mb-4" href="acaoAdicionarAoCarrinho.php?id=<?=$id?>&estoque=<?=$qtd?>" role="button" id="adicionarCarrinho" style="bottom: 0; position: absolute; margin-left: 360px;">Adicionar ao carrinho</a>
