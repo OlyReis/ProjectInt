@@ -10,6 +10,17 @@ if (isset($_SESSION['email']))
   $linha = $consulta->fetch_array(MYSQLI_ASSOC);
   $nome = $linha['nome'];
   $adm = $linha['adm'];
+
+  if (isset($_SESSION['nItensCarrinho'])) {
+      $nItensCarrinho = $_SESSION['nItensCarrinho'];
+    } else {
+      $_SESSION['nItensCarrinho'] = 0;
+      $nItensCarrinho = $_SESSION['nItensCarrinho'];
+    }
+
+} else {
+  $_SESSION['nItensCarrinho'] = 0;
+  $nItensCarrinho = $_SESSION['nItensCarrinho'];
 }
 ?>
 <!DOCTYPE html>
@@ -68,7 +79,7 @@ if (isset($_SESSION['email']))
     </ul>
     <a href="carrinho.php" class="mr-3"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-    </svg><span class="numItensCarrinho" name="numItensCarrinho">0</span><a>
+    </svg><span class="numItensCarrinho" name="numItensCarrinho"><?php echo $nItensCarrinho; ?></span><a>
       <form class="form-inline my-2 my-lg-0 mr-3">
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisa" title="Type in a name">
       </form>
