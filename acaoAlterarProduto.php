@@ -1,10 +1,9 @@
 <?php 
-include('conexao.php');
+	include('conexao.php');
 
-session_start();
-if (isset($_SESSION['id'])) 
-{ 
-	$id = $_SESSION['id'];
+	session_start();
+
+	$id = $_GET['id'];
 	$nomeProduto = $_POST['nomeProduto'];
 	$anoLancamento = $_POST['anoLancamento'];
 	$descricaoProdutoMenu = $_POST['descricaoProdutoMenu'];
@@ -32,5 +31,4 @@ if (isset($_SESSION['id']))
 		echo '<script>alert("Alteração feita com sucesso!")</script>';
 		echo '<script>window.location="alterarProduto.php?id=' . $id . '"</script>';
 	}
-}
 ?>
