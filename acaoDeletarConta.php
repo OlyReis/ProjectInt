@@ -29,8 +29,6 @@
         echo "<script> $.confirm({type: 'red', title: 'Deletar Conta', content: 'Conta deletada!', buttons: { Ok: { btnClass: 'btn-red', action: function () {"; echo 'window.location="index.php"'; echo " }}}});</script>";
       } else {
         echo "<script> $.confirm({type: 'red', title: 'Deletar Conta', content: 'Erro ao deletar conta!', buttons: { Ok: { btnClass: 'btn-red', action: function () {"; echo 'window.location="deletarConta.php"'; echo " }}}});</script>";
-        echo "<script> alert('Erro ao deletar conta')</script>";
-        echo '<script>window.location="deletarConta.php"</script>';
       }
     } else {
       echo "<script> $.confirm({type: 'red', title: 'Deletar Conta', content: 'Senha incorreta', buttons: { Ok: { btnClass: 'btn-red', action: function () {"; echo 'window.location="deletarConta.php"'; echo " }}}});</script>";
