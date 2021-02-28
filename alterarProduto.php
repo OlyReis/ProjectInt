@@ -47,7 +47,7 @@ if (!$consulta) {
   $descricaoMenu = $linha['descricaoM'];
   $precoProduto = $linha['preco']; 
   $quantidadeProduto = $linha['qtd'];
-  $numeroTamProduto = $linha['NTP'];
+  $numeroTamProduto = $linha['ntp'];
   $tamanho = $linha['tamanho'];
   $descricaoProduto = $linha['descricaoP'];
 }
