@@ -1,3 +1,34 @@
+<?php
+  include('conexao.php');
+
+  session_start();
+  if (isset($_SESSION['email'])) 
+  { 
+    $logado = $_SESSION['email'];
+    $script = 'SELECT * FROM usuarios WHERE email = "' . $logado . '"';
+    $consulta = $conexao->query($script);
+    $linha = $consulta->fetch_array(MYSQLI_ASSOC);
+    $nome = $linha['nome'];
+    $cidade = $linha['cidade'];
+    $estado = $linha['estado'];
+    $cep = $linha['cep'];
+    $telefone = $linha['telefone'];
+
+    if ($_SESSION['nItensCarrinho'] != 0) {
+      $nItensCarrinho = $_SESSION['nItensCarrinho'];
+      $idsCarrinho = $_SESSION['idsCarrinho'];
+      $idCadaProdutoCarrinho = explode(",", $idsCarrinho);
+    } else {
+      $_SESSION['nItensCarrinho'] = 0;
+      $nItensCarrinho = $_SESSION['nItensCarrinho'];
+    }
+
+  } else {
+    $_SESSION['nItensCarrinho'] = 0;
+    $nItensCarrinho = $_SESSION['nItensCarrinho'];
+  }
+?>
+
 <!DOCTYPE hmtl>
 <html>
 <head>
@@ -32,15 +63,34 @@
       </ul>
       <a href="carrinho.php" class="mr-3"><svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-cart2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-      </svg><span class="numItensCarrinho" name="numItensCarrinho">0</span><a>
+      </svg><span class="numItensCarrinho" name="numItensCarrinho"><?php echo $nItensCarrinho; ?></span><a>
+      <?php
+      if (isset($_SESSION['email'])) {
+        echo '
+        <div class="dropdown show" style="margin-right: 40px;">
+          <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ' . $nome . '
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: red;">
+            <a class="dropdown-item" href="#">Meus Dados</a>
+            <a class="dropdown-item" id="deletarConta" href="#">Deletar Conta</a>
+            <a class="dropdown-item" href="logout.php">Logout</a>
+          </div>
+        </div>';
+      } else {
+        echo '
         <button type="button" class="btn btn-dark"><a href="login.php">Login<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-square ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-          <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-        </svg></a></button>
+        <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+        <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+      </svg></a></button>';
+      }
+      ?>
       </div>
     </nav>
 
     <div class="container">
+      <form method="GET" action="concluirCompra.php">
       <div class="row">
         <div class="col-sm-6">
           <h3 class="col-12 mb-4">Como você quer receber sua compra?</h3>
@@ -57,8 +107,8 @@
               </div> 
               <div class="col-sm-9 mt-0 ml-0 p-0">
                 <p class="font-weight-bold text-light mt-0 mb-0" style="font-size: 15px">Endereço</p>
-                <p class="text-light mt-0 mb-0" style="font-size: 15px">Cidade, Estado - CEP 00000000</p>
-                <p class="text-light mt-0 mb-0" style="font-size: 15px">Nome do Cliente - (00) 0000-00009</p>
+                <p class="text-light mt-0 mb-0" style="font-size: 15px"><?php echo $cidade; ?>, <?php echo $estado; ?> - CEP <?php echo $cep; ?></p>
+                <p class="text-light mt-0 mb-0" style="font-size: 15px"><?php echo $nome; ?> - <?php echo $telefone; ?></p>
               </div>          
             </div>
             <div class="row mb-3 mt-0 ml-0">
@@ -76,7 +126,7 @@
           <div class="divProdutoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
             <div class="row mb-0 mt-3 ml-0">
               <div class="col-sm-1"> 
-                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio1" required>
+                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio1" value="Chegará entre" required>
               </div>
               <div class="col">
                 <p class="font-weight-bold text-light" id="opcaoEnvio1">Chegará entre </p>
@@ -87,7 +137,7 @@
             </div>
             <div class="row mb-0 mt-3 ml-0">
               <div class="col-sm-1"> 
-                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio2" required>
+                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio2" value="Chegará entre" required>
               </div>
               <div class="col">
                 <p class="font-weight-bold text-light" id="opcaoEnvio2">Chegará entre </p>
@@ -103,7 +153,7 @@
           <div class="divProdutoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
             <div class="row mb-0 mt-3 ml-0">
               <div class="col-sm-1 my-auto"> 
-                <input type="radio" name="opcaoPagamento" id="radioOpcaoPagamento1">
+                <input type="radio" name="opcaoPagamento" id="radioOpcaoPagamento1" value="CartaoCredito">
               </div>
               <div class="col-sm-1 ml-1">
                 <svg class="text-primary" width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-credit-card" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -118,7 +168,7 @@
 
             <div class="row mb-3 mt-3 ml-0">
               <div class="col-sm-1 my-auto"> 
-                <input type="radio" name="opcaoPagamento" id="radioOpcaoPagamento2">
+                <input type="radio" name="opcaoPagamento" id="radioOpcaoPagamento2" value="Boleto">
               </div>
               <div class="col-sm-1">
                 <svg class="text-primary" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-upc" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -137,10 +187,11 @@
           <div class="divResumoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
             <div class="row mb-0">
               <div class="col-sm-8">
-                <div><h5 class="text-light mt-3 ml-4" id="numItensSubtotal">Subtotal (1 item)</h5></div>
+                <div><h5 class="text-light mt-3 ml-4" id="numItensSubtotal">Subtotal ( <?php if ((count($idCadaProdutoCarrinho) - 1) == 1) { echo (count($idCadaProdutoCarrinho) - 1) . ' item)'; } else { echo (count($idCadaProdutoCarrinho) - 1) . ' itens)'; } ?></h5></div>
               </div>
+              <input type="hidden" value="<?php echo $valorTotal; ?>" name="valorTotal" id="inputHiddenValorTotal">
               <div class="col">
-                <h5 class="text-light mt-3 ml-4" id="subtotal" name="subtotal">R$ 68,90</h5>
+                <h5 class="text-light mt-3 ml-1" id="subtotal" name="subtotal">R$ <?php echo str_replace(".",",",$valorTotal); ?></h5>
               </div>
             </div>
             <hr style="background-color: black">
@@ -149,14 +200,14 @@
                 <h5 class="text-light ml-4 mt-3">Valor Total</h5>
               </div>
               <div class="col">
-                <h5 class="text-light mt-3 ml-4" id="valorTotal" name="valorTotal">R$ 68,90</h5>
+                <h5 class="text-light mt-3 ml-1" id="valorTotal" name="valorTotal">R$ <?php echo str_replace(".",",",$valorTotal); ?></h5>
               </div>           
             </div>
             <hr style="background-color: black">
             <div class="row mt-0">
               <div class="col"></div>
               <div class="col-sm-10 mb-3">
-                <a href="#" class=" text-light btn btn-sm bg-primary btn-rounded font-weight-bold mr-3 btnADM w-100" style="line-height: 30px;" type="button" id="continuarBtn">Continuar</a>
+                <input class=" text-light btn btn-sm bg-primary btn-rounded font-weight-bold mr-3 btnADM w-100" style="line-height: 30px;" type="submit" id="continuarBtn">
               </div>
               <div class="col"></div>
             </div>
@@ -166,6 +217,7 @@
           </div>
         </div>
       </div>
+    </form>
     </div>
 
     <footer class="py-5 mt-5">
