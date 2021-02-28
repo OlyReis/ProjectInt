@@ -140,12 +140,14 @@
     ?>
 
     <div class="container">
+      <form method="GET" action="acaoBotaoContinuarCarrinhoPHP.php">
       <div class="row">
         <div class="col-sm-6">
           <h3 class="col-12 mb-4">Meu Carrinho</h3>
           <?php 
             if ($_SESSION['nItensCarrinho'] != 0) {
             $somaPrecos = 0;
+            $estoqueCadaProduto = "";
             for ($i = 0; $i < count($idCadaProdutoCarrinho)-1; $i++) { 
               $script = "SELECT * FROM produtos WHERE id = $idCadaProdutoCarrinho[$i]";
 
@@ -156,12 +158,14 @@
                 $nome = $linha['nome'];
                 $foto = $linha['foto'];
                 $estoque = $linha['qtd'];
+                $estoqueCadaProduto = $estoqueCadaProduto . (string)$estoque . ',';
                 $preco = $linha['preco'];
                 $somaPrecos += $preco;
                 $tamanhos = $linha['tamanho'];                
                 $tamanhos = explode(",", $tamanhos);
               
               echo '
+              <input type="hidden" value="' . $idCadaProdutoCarrinho[$i] . '" name="idProduto' . ($i+1) . '">
           <div class="divProdutoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
             <div class="row mb-0">
               <div class="col-sm-4 ml-0 mt-0">
@@ -187,7 +191,7 @@
                 <a id="menosQtd" onclick="menosQtd(' . $preco . ', ' . $idCadaProdutoCarrinho[$i] . ')" href="javascript:void(0)"><svg width="1.4em" height="1.4em" viewBox="0 0 16 16"  class="bi bi-dash-circle-fill text-light mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
                 </svg><a>
-                <input type="number" class="form-control rounded darkmode-ignore col text-center ml-1 mr-1" readonly="true" value="1" name="qtd" id="inputQTD' . $idCadaProdutoCarrinho[$i] . '" style="width: 55px; height: 30px;" value="4">
+                <input type="number" class="form-control rounded darkmode-ignore col text-center ml-1 mr-1" readonly="true" value="1" name="qtd' . $idCadaProdutoCarrinho[$i] . '" id="inputQTD' . $idCadaProdutoCarrinho[$i] . '" style="width: 55px; height: 30px;" value="4">
                 <a id="maisQtd" onclick="maisQtd(' . $preco . ', ' . $idCadaProdutoCarrinho[$i] . ', ' . $estoque . ')" href="javascript:void(0)"><svg width="1.4em" height="1.4em" viewBox="0 0 16 16"  class="bi bi-plus-circle-fill text-light mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                 </svg></a>
@@ -196,7 +200,7 @@
             <div class="row mt-2">
               <div class="col-sm-3 ml-3"><p class="text-light">Tamanho</p></div>
               <div class="col-sm-5">
-                <select name="tamanhosProduto" id="tamanhosProduto' . $idCadaProdutoCarrinho[$i] . '" style="width: 60px;">';
+                <select name="tamanhoProduto' . $idCadaProdutoCarrinho[$i] . '" id="tamanhosProduto' . $idCadaProdutoCarrinho[$i] . '" style="width: 60px;">';
                   for ($t = 0; $t < count($tamanhos); $t++) { echo '
                   <option value="' . $tamanhos[$t] . '">' . $tamanhos[$t] . '</option>';
                   } echo '
@@ -222,9 +226,11 @@
               <div class="col-sm-8">
                 <div><h5 class="text-light mt-3 ml-4" id="numItensSubtotal">Subtotal ('; if ((count($idCadaProdutoCarrinho) - 1) == 1) { echo (count($idCadaProdutoCarrinho) - 1) . ' item)'; } else { echo (count($idCadaProdutoCarrinho) - 1) . ' itens)'; } echo '
                 </h5></div>
+                <input type="hidden" value="' . (count($idCadaProdutoCarrinho) - 1) . '" name="qtdProdutos">
               </div>
               <div class="col">
                 <h5 class="text-light mt-3 ml-1" id="subtotal" name="subtotal">R$ ' . str_replace(".", ",", $somaPrecos) . '</h5>
+                <input type="hidden" value="' . $somaPrecos . '" name="valorTotal" id="inputHiddenValorTotal">
               </div>
             </div>
             <hr style="background-color: black">
@@ -240,7 +246,7 @@
             <div class="row mt-0">
               <div class="col"></div>
               <div class="col-sm-10 mb-3">
-                <a href="#" class=" text-light btn btn-sm bg-primary btn-rounded font-weight-bold mr-3 btnADM w-100" style="line-height: 30px;" type="button" id="continuarBtn">Continuar</a>
+                <input class=" text-light btn btn-sm bg-primary btn-rounded font-weight-bold mr-3 btnADM w-100" style="line-height: 30px;" type="submit" id="continuarBtn" value="Continuar">
               </div>
               <div class="col"></div>
               
@@ -251,6 +257,7 @@
         </div>
       </div>'; }
       ?>
+    </form>
     </div>
 
   <footer class="py-5 mt-5">
