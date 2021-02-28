@@ -10,7 +10,7 @@
     $linha = $consulta->fetch_array(MYSQLI_ASSOC);
     $nome = $linha['nome'];
 
-    if (isset($_SESSION['nItensCarrinho'])) {
+    if ($_SESSION['nItensCarrinho'] != 0) {
       $nItensCarrinho = $_SESSION['nItensCarrinho'];
       $idsCarrinho = $_SESSION['idsCarrinho'];
       $idCadaProdutoCarrinho = explode(",", $idsCarrinho);
