@@ -7,6 +7,7 @@ function menosQtd($preco, $idProduto) {
     $subTotal = $subTotal.toFixed(2);
     document.getElementById("subtotal").innerHTML = "R$ " + $subTotal.toString().replace(".",",");
     document.getElementById("valorTotal").innerHTML = "R$ " + $subTotal.toString().replace(".",",");
+    document.getElementById("inputHiddenValorTotal").value = $subTotal;
   }
 
 }
@@ -20,6 +21,7 @@ function maisQtd($preco, $idProduto, $estoqueProduto) {
       $subTotal = $subTotal.toFixed(2);
       document.getElementById("subtotal").innerHTML = "R$ " + $subTotal.toString().replace(".",",");
       document.getElementById("valorTotal").innerHTML = "R$ " + $subTotal.toString().replace(".",",");
+      document.getElementById("inputHiddenValorTotal").value = $subTotal;
     }
   
 }
