@@ -54,9 +54,9 @@ $("#numTamanhos").keyup(function() {
   var numTamanhos = parseInt(document.getElementById("numTamanhos").value);
   for (i = 1; i <= numTamanhos; i++) {
     if (i != numTamanhos) {
-      dataMaskTamanhos += "00,";
+      dataMaskTamanhos += "AA,";
     } else {
-      dataMaskTamanhos += "00";
+      dataMaskTamanhos += "AA";
     }
   }
   $("#tamanhosProduto").mask(dataMaskTamanhos);
