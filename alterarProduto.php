@@ -24,7 +24,6 @@ if (isset($_SESSION['email']))
   }
 
 $id = $_GET['id'];
-$_SESSION['id']=$id;
 $script = "SELECT * FROM produtos WHERE id = $id";
 
 $consulta = $conexao->query($script);
@@ -118,7 +117,7 @@ if (!$consulta) {
 
   <h1 class="col-12">Alterar Produto</h1><br>
   <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-    <form class="needs-validation m-4" method="POST" action="acaoAlterarProduto.php" enctype="multipart/form-data">
+    <form class="needs-validation m-4" method="POST" action="acaoAlterarProduto.php?id=<?=$id?>" enctype="multipart/form-data">
       <div class="form-row mb-3 mt-3">
         <div class="col">
           <label form="labelNomeProduto" class="mb-0">Nome do Produto</label> 
