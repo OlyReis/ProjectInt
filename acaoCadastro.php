@@ -1,5 +1,6 @@
 <?php 
 include("conexao.php");
+echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"> <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">';
 
 
 function inserir($conexao, $nome, $sobrenome, $data_nascimento, $sexo, $cpf, $cep, $telefone, $endereco, $num_endereco, $complemento, $cidade, $bairro, $estado, $email, $senha) {
@@ -14,12 +15,10 @@ function inserir($conexao, $nome, $sobrenome, $data_nascimento, $sexo, $cpf, $ce
 		echo "<br><br>";
 		echo $script;
 		echo "<br>";
-		echo "<script> alert('Cadstro Incorreto. Favor verificar dados.')</script>";
-		echo '<script>window.location="cadastro.php"</script>';
+		echo "<script> $.confirm({type: 'red', title: 'Cadastro', content: 'Cadastro incorreto. Favor verificar dados.', buttons: { Ok: { btnClass: 'btn-red', action: function () {"; echo 'window.location="cadastro.php"'; echo " }}}});</script>";
 	}else{
 		echo "<br>Inserção Realizada corretamente!";
-		echo "<script> alert('Cadastro Concluído! Faça login para continuar.') </script>";
-		echo '<script>window.location="login.php"</script>';
+		echo "<script> $.confirm({type: 'red', title: 'Cadastro', content: 'Cadastro Concluído! Faça login para continuar.', buttons: { Ok: { btnClass: 'btn-red', action: function () {"; echo 'window.location="login.php"'; echo " }}}});</script>";
 	}
 }
 
