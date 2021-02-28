@@ -5,5 +5,5 @@
   $id = $_GET['id'];
   $nomeProduto = $_GET['nome'];
 
-  echo "<script> $.confirm({type: 'red', title: 'Excluir Produto', content: 'Tem certeza que deseja excluir o produto " . $nomeProduto . "?', buttons: { Sim: { btnClass: 'btn-red', action: function () {"; echo 'window.location="acaoExcluirProduto.php"'; echo " }}, Nao: { btnClass: 'btn-red', action: function () {"; echo 'window.location="indexAlterarProduto.php"'; echo " }}}});</script>";
+  echo "<script> $.confirm({type: 'red', title: 'Excluir Produto', content: 'Tem certeza que deseja excluir o produto " . $nomeProduto . "?', buttons: { Sim: { btnClass: 'btn-red', action: function () {"; echo 'window.location="acaoExcluirProduto.php?id=' . $id . '&nome=' . $nomeProduto . '"'; echo " }}, Nao: { btnClass: 'btn-red', action: function () {"; echo 'window.location="indexAlterarProduto.php"'; echo " }}}});</script>";
 ?>
