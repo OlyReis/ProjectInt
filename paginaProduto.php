@@ -118,7 +118,7 @@
               <p class="mb-0 text-light mt-0 ml-1" name="Tamanho">Tamanhos Disponíveis: <?php echo str_replace(",",", ",$tamanhos); ?></p>
               <p class="mb-4 text-light mt-0 ml-1" name="numEstoque">Estoque: <?php echo $qtd; ?></p>
               <a class="btn btn-dark text-light mb-4" href="acaoAdicionarAoCarrinho.php?id=<?=$id?>&estoque=<?=$qtd?>&botaoComprar=sim" role="button" id="comprarProduto" style="bottom: 0; position: absolute; margin-left: 260px;">Comprar</a> 
-              <a class="btn btn-dark mb-4" href="acaoAdicionarAoCarrinho.php?id=<?=$id?>&estoque=<?=$qtd?>" role="button" id="adicionarCarrinho" style="bottom: 0; position: absolute; margin-left: 360px;">Adicionar ao carrinho</a>
+              <a class="btn btn-dark mb-4" href="acaoAdicionarAoCarrinho.php?id=<?=$id?>&estoque=<?=$qtd?>&botaoComprar=nao" role="button" id="adicionarCarrinho" style="bottom: 0; position: absolute; margin-left: 360px;">Adicionar ao carrinho</a>
             </div>
           </div>
         </div>
