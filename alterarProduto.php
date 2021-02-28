@@ -166,7 +166,7 @@ if (!$consulta) {
         </div>
         <div class="col">
           <label form="labelTamanhosProduto" class="mb-0">Tamanhos (Separados por vírgula)</label>
-          <input type="text" name="tamanhosProduto" class="form-control input rounded-0 mt-0" id="tamanhosProduto" placeholder="Digite novos Tamanhos do Produto" onKeyPress="if (this.value.length >= 29) return false;" value="<?php echo $tamanho; ?>" data-mask="00,00,00,00,00,00,00" required>
+          <input type="text" name="tamanhosProduto" class="form-control input rounded-0 mt-0" id="tamanhosProduto" placeholder="Digite novos Tamanhos do Produto" onKeyPress="if (this.value.length >= 29) return false;" value="<?php echo $tamanho; ?>" data-mask="AA,AA,AA,AA,AA,AA,AA" required>
         </div>
       </div>
       <div class="form-row mb-0 mt-3"> 
