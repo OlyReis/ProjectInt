@@ -87,7 +87,7 @@
 
     <h1 class="col-12">Seus dados</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" novalidate action="acaoAlterarUsuario.php" method="POST">
+      <form class="needs-validation m-4" action="acaoAlterarUsuario.php" method="POST">
         <div class="form-row mb-3 mt-3">
           <div class="col">
             <label form="labelNome" class="mb-0">Nome</label> 
@@ -162,7 +162,7 @@
             <input type="number" class="form-control input rounded-0" id="validationCustomEndereçoNumero" onkeydown="javascript: return event.keyCode == 69 ? false : true"  name="num_endereco" placeholder="Nº" value="<?php echo $num_endereco; ?>" required>
           </div>
           <div class="col mt-4 col-sm-4">
-            <input type="text" class="form-control input rounded-0" id="validationCustomComplemento" name="complemento_endereco" placeholder="Complemento" value="<?php echo $complemento; ?>" required>
+            <input type="text" class="form-control input rounded-0" id="validationCustomComplemento" name="complemento_endereco" placeholder="Complemento" value="<?php echo $complemento; ?>">
           </div>
         </div>
 
