@@ -83,22 +83,25 @@
             
               $consulta = $conexao->query($script);
 
-              while ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
-                $idCompra = $linha['id'];
-                $qtdProdutos = $linha['qtdProdutos'];
-                $qtdCadaProduto = explode(",",$qtdProdutos);
-                $qtdTotal = 0;
-                for ($i = 0; $i < count($qtdCadaProduto); $i++) {
-                  $qtdTotal += (int)$qtdCadaProduto[$i];
-                }
-                $modoPagamento = $linha['modoPagamento'];
-                $valorTotal = str_replace(".",",",$linha['valorTotal']);
-                $dataCompra = $linha['dataCompra'];
-                $dataCompraAno = substr($dataCompra,0,4);
-                $dataCompraMes = substr($dataCompra,-5,2);
-                $dataCompraDia = substr($dataCompra,8,10);
-                $dataCompra = $dataCompraDia . "/" . $dataCompraMes . "/" . $dataCompraAno;
-                echo '
+              if ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
+                $fezCompras = true;
+
+                while ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
+                  $idCompra = $linha['id'];
+                  $qtdProdutos = $linha['qtdProdutos'];
+                  $qtdCadaProduto = explode(",",$qtdProdutos);
+                  $qtdTotal = 0;
+                  for ($i = 0; $i < count($qtdCadaProduto); $i++) {
+                    $qtdTotal += (int)$qtdCadaProduto[$i];
+                  }
+                  $modoPagamento = $linha['modoPagamento'];
+                  $valorTotal = str_replace(".",",",$linha['valorTotal']);
+                  $dataCompra = $linha['dataCompra'];
+                  $dataCompraAno = substr($dataCompra,0,4);
+                  $dataCompraMes = substr($dataCompra,-5,2);
+                  $dataCompraDia = substr($dataCompra,8,10);
+                  $dataCompra = $dataCompraDia . "/" . $dataCompraMes . "/" . $dataCompraAno;
+                  echo '
                 <table class="table border-0 rounded" style="font-family: serif;">
                   <thead class="p-0 m-0">
                     <tr class="d-flex border-0 p-0 m-0">
@@ -115,11 +118,15 @@
                     </tr>
                   </tbody>          
                 </table>
-                '; }
+                '; }} else {
+                  $fezCompras = false;
+                }
           ?>
       </div>       
     </div>
-
+   <?php
+      if (!$fezCompras) { echo '<p style="margin-top: -90px; margin-left: 50px;">Você ainda não fez compras em nosso site.<p>'; }
+    ?>
     <footer class=" py-5">
       <div class="row">
         <div class="col- col-12 col-md">
