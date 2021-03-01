@@ -16,20 +16,34 @@
     $telefone = $linha['telefone'];
 
     $OpcaoEnvio = $_POST['opcaoEnvio'];
+    echo $OpcaoEnvio . "<br>";
+    $OpcaoPagamento = $_POST['opcaoPagamento'];
+    echo $OpcaoPagamento . "<br>";
 
     $idTodosProdutos = $_POST['idTodosProdutos'];
     $idCadaProduto = explode(",",$idTodosProdutos);
-    echo $idCadaProduto[0];
+    echo $idCadaProduto[0] . "<br>";
     $qtdTodosProdutos = $_POST['qtdTodosProdutos'];
     $qtdCadaProduto = explode(",",$qtdTodosProdutos);
-    echo $qtdCadaProduto[0];
+    echo $qtdCadaProduto[0] . "<br>";
     $tamanhoTodosProdutos = $_POST['tamanhoTodosProdutos'];
     $tamanhoCadaProduto = explode(",",$tamanhoTodosProdutos);
-    echo $tamanhoCadaProduto[0];
+    echo $tamanhoCadaProduto[0] . "<br>";
+    $precoTodosProdutos = $_POST['precoTodosProdutos'];
+    $precoCadaProduto = explode(",",$precoTodosProdutos);
+    echo $precoCadaProduto[0] . "<br>";
+    $nomeTodosProdutos = $_POST['nomeTodosProdutos'];
+    $nomeCadaProduto = explode(",",$nomeTodosProdutos);
+    echo $nomeCadaProduto[0] . "<br>";
+    $fotoTodosProdutos = $_POST['fotoTodosProdutos'];
+    $fotoCadaProduto = explode(",",$fotoTodosProdutos);
+    echo $fotoCadaProduto[0] . "<br>";
     $valorTotal = $_POST['valorTotal'];
+    echo $valorTotal . "<br>";
     $modoPagamento = $_POST['opcaoPagamento'];
     date_default_timezone_set('America/Sao_Paulo');
     $dataCompra = date("Y-m-d");
+    echo $dataCompra;
 
     if ($_SESSION['nItensCarrinho'] != 0) {
       $nItensCarrinho = $_SESSION['nItensCarrinho'];

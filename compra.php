@@ -17,6 +17,9 @@
     $idTodosProdutos = $_POST['idTodosProdutos'];
     $qtdTodosProdutos = $_POST['qtdTodosProdutos'];
     $tamanhoTodosProdutos = $_POST['tamanhoTodosProdutos'];
+    $precoTodosProdutos = $_POST['precoTodosProdutos'];
+    $nomeTodosProdutos = $_POST['nomeTodosProdutos'];
+    $fotoTodosProdutos = $_POST['fotoTodosProdutos'];
     $valorTotal = $_POST['valorTotal'];
 
     if ($_SESSION['nItensCarrinho'] != 0) {
@@ -99,6 +102,9 @@
         <input type="hidden" name="idTodosProdutos" value="<?php echo $idTodosProdutos; ?>">
         <input type="hidden" name="qtdTodosProdutos" value="<?php echo $qtdTodosProdutos; ?>">
         <input type="hidden" name="tamanhoTodosProdutos" value="<?php echo $tamanhoTodosProdutos; ?>">
+        <input type="hidden" name="precoTodosProdutos" value="<?php echo $precoTodosProdutos; ?>">
+        <input type="hidden" name="nomeTodosProdutos" value="<?php echo $nomeTodosProdutos; ?>">
+        <input type="hidden" name="fotoTodosProdutos" value="<?php echo $fotoTodosProdutos; ?>">
         <input type="hidden" name="valorTotal" value="<?php echo $valorTotal; ?>">
       <div class="row">
         <div class="col-sm-6">
@@ -162,7 +168,7 @@
           <div class="divProdutoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
             <div class="row mb-0 mt-3 ml-0">
               <div class="col-sm-1 my-auto"> 
-                <input type="radio" name="opcaoPagamento" id="radioOpcaoPagamento1" value="Cartao de Crédito" required>
+                <input type="radio" name="opcaoPagamento" id="radioOpcaoPagamento1" value="Cartão de Crédito" required>
               </div>
               <div class="col-sm-1 ml-1">
                 <svg class="text-primary" width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-credit-card" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

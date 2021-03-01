@@ -170,9 +170,11 @@
             <div class="row mb-0">
               <div class="col-sm-4 ml-0 mt-0">
                 <a href="paginaProduto.php?id=' . $idCadaProdutoCarrinho[$i] . '"><img src="' . $foto . '" class="w-100 h-100" alt="..."></a>
+                <input type="hidden" name="fotoProduto' .  $idCadaProdutoCarrinho[$i] . '" value="' . $foto . '">
               </div>
               <div class="col-md-8 mb-0">
                 <h3 class="mb-0 text-light">' . $nome . '</h3>
+                <input type="hidden" name="nomeProduto' . $idCadaProdutoCarrinho[$i] .'" value="' . $nome . '">
                 <p class="text-light ml-1" id="numEstoque" name="numEstoque">Estoque: ' . $estoque . '</p>
                 <p class=" mt-0 ml-1 text-light">Entregue por Modas Z</p>
               </div>
@@ -208,6 +210,7 @@
               </div>
                <div class="col text-light">
                 <h4 id="valorProduto">R$ ' . number_format($preco,2,',','') . '</h4>
+                <input type="hidden" name="precoProduto' . $idCadaProdutoCarrinho[$i] . '" value="' . $preco . '">
               </div>
             </div>
           </div>'; }} else {
