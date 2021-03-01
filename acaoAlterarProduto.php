@@ -9,6 +9,8 @@
 	$anoLancamento = $_POST['anoLancamento'];
 	$descricaoProdutoMenu = $_POST['descricaoProdutoMenu'];
 	$precoProduto = $_POST['precoProduto'];
+	$precoProduto = substr($precoProduto,3,strlen($precoProduto));
+	$precoProduto = str_replace(",",".",$precoProduto);
 	$quantidadeProduto = $_POST['qtd'];
 	$numTamanhos = $_POST['numTamanhos'];
 	$tamanhosProduto = $_POST['tamanhosProduto'];
@@ -20,7 +22,7 @@
 
 	move_uploaded_file($file['tmp_name'], $destino);
 
-	$script= 'UPDATE produtos SET nome= "'.$nomeProduto.'",anoLancamento="'.$anoLancamento.'",descricaoM="'.$descricaoProdutoMenu.'",preco="'.$precoProduto.'",qtd="'.$quantidadeProduto.'", NTP= "'.$numTamanhos.'",tamanho="'.$tamanhosProduto.'",foto="'.$destino.'",descricaoP="'.$descricaoProduto.'" WHERE id= '.$id;
+	$script= 'UPDATE produtos SET nome= "'.$nomeProduto.'",anoLancamento="'.$anoLancamento.'",descricaoM="'.$descricaoProdutoMenu.'",preco='.$precoProduto.',qtd="'.$quantidadeProduto.'", NTP= "'.$numTamanhos.'",tamanho="'.$tamanhosProduto.'",foto="'.$destino.'",descricaoP="'.$descricaoProduto.'" WHERE id= '.$id;
 
 
 	$altera = $conexao->query($script);
