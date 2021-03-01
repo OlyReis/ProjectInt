@@ -74,7 +74,8 @@
     </nav>
 
     <h1 class="col-12">Suas Compras</h1><br>
-    <div class="container col-12 divMinhasCompras mb-5">
+    <div class="container col-12 divMinhasCompras rounded mb-5">
+      <div class="divProdutoCarrinho border-0 card rounded w-100 h-auto darkmode-ignore mb-4">       
       <?php          
               $script = "SELECT * FROM compras WHERE idUsuario = $id";
 
@@ -84,21 +85,39 @@
 
               while ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
                 $idCompra = $linha['id'];
+                $qtdProdutos = $linha['qtdProdutos'];
+                $qtdCadaProduto = explode(",",$qtdProdutos);
+                $qtdTotal = 0;
+                for ($i = 0; $i < count($qtdCadaProduto); $i++) {
+                  $qtdTotal += (int)$qtdCadaProduto[$i];
+                }
+                $modoPagamento = $linha['modoPagamento'];
+                $valorTotal = str_replace(".",",",$linha['valorTotal']);
+                $dataCompra = $linha['dataCompra'];
+                $dataCompraAno = substr($dataCompra,0,4);
+                $dataCompraMes = substr($dataCompra,-5,2);
+                $dataCompraDia = substr($dataCompra,8,10);
+                $dataCompra = $dataCompraDia . "/" . $dataCompraMes . "/" . $dataCompraAno;
                 echo '
-      <div class="divProdutoCarrinho border-0 card rounded w-100 h-auto darkmode-ignore mb-4">       
-            <div class="row mb-0">
-              <table class="ml-4">
-                <tr class="border-bottom border-dark">
-                  <th class="text-light" style="padding: 8px;">Id da Compra</th>
-                  <th class="text-light">Id da Compra</th>
-                </tr>
-                <tr>
-                  <td>' . $idCompra . '</td>
-                <tr>
-              </table>
-            </div>
-          </div>'; }
-          ?> 
+                <table class="table border-0 rounded" style="font-family: serif;">
+                  <thead class="p-0 m-0">
+                    <tr class="d-flex border-0 p-0 m-0">
+                      <th class="border-0 text-right col-2 pb-0 pl-0 " style="color: #FF6D20; font-size: 17px;">' . $dataCompra . '</th>
+                      <th class="border-0 text-light text-left col-7 pb-0 ">PEDIDO ' . $idCompra . ' - ' . mb_strtoupper($modoPagamento, 'UTF-8') . '</th>
+                      <th class="border-0 text-light text-right col-3 pb-0 ">VALOR: R$ ' . $valorTotal . '</th>
+                    </tr>
+                  </thead>
+                  <tbody class="pt-0">
+                  <tr class="d-flex pt-0">
+                    <th class="border-0 col-2"></th>
+                    <th class="border-top-0 border-bottom col-7"></th>
+                    <td class="border-top-0 font-weight-bold border-bottom text-right py-0 col-3"><a href="minhasComprasDetalhada.php?id=' . $idCompra . '">+ Detalhes</a></td>
+                    </tr>
+                  </tbody>          
+                </table>
+                '; }
+          ?>
+      </div>       
     </div>
 
     <footer class=" py-5">
