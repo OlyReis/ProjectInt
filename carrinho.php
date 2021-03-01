@@ -63,14 +63,14 @@
       <?php
       if (isset($_SESSION['email'])) {
         echo '
-        <div class="dropdown show" style="margin-right: 40px;">
+        <div class="dropdown show" style="margin-right: 65px;">
           <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             ' . $nome . '
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: red;">
-            <a class="dropdown-item" href="#">Meus Dados</a>
-            <a class="dropdown-item" id="deletarConta" href="#">Deletar Conta</a>
+            <a class="dropdown-item" href="usuario.php">Meus Dados</a>
+            <a class="dropdown-item" id="deletarConta" href="deletarConta.php">Deletar Conta</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
         </div>';
@@ -81,7 +81,7 @@
         <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
       </svg></a></button>';
       }
-      ?>        
+      ?>       
       </div>
     </nav>
 
