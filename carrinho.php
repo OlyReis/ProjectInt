@@ -140,7 +140,7 @@
     ?>
 
     <div class="container">
-      <form method="GET" action="acaoBotaoContinuarCarrinhoPHP.php">
+      <form method="POST" action="acaoBotaoContinuarCarrinhoPHP.php">
       <div class="row">
         <div class="col-sm-6">
           <h3 class="col-12 mb-4">Meu Carrinho</h3>
