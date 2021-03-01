@@ -14,6 +14,11 @@
     $cep = $linha['cep'];
     $telefone = $linha['telefone'];
 
+    $idTodosProdutos = $_POST['idTodosProdutos'];
+    $qtdTodosProdutos = $_POST['qtdTodosProdutos'];
+    $tamanhoTodosProdutos = $_POST['tamanhoTodosProdutos'];
+    $valorTotal = $_POST['valorTotal'];
+
     if ($_SESSION['nItensCarrinho'] != 0) {
       $nItensCarrinho = $_SESSION['nItensCarrinho'];
       $idsCarrinho = $_SESSION['idsCarrinho'];
@@ -90,7 +95,11 @@
     </nav>
 
     <div class="container">
-      <form method="GET" action="concluirCompra.php">
+      <form method="POST" action="concluirCompra.php">
+        <input type="hidden" name="idTodosProdutos" value="<?php echo $idTodosProdutos; ?>">
+        <input type="hidden" name="qtdTodosProdutos" value="<?php echo $qtdTodosProdutos; ?>">
+        <input type="hidden" name="tamanhoTodosProdutos" value="<?php echo $tamanhoTodosProdutos; ?>">
+        <input type="hidden" name="valorTotal" value="<?php echo $valorTotal; ?>">
       <div class="row">
         <div class="col-sm-6">
           <h3 class="col-12 mb-4">Como você quer receber sua compra?</h3>
@@ -126,7 +135,7 @@
           <div class="divProdutoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
             <div class="row mb-0 mt-3 ml-0">
               <div class="col-sm-1"> 
-                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio1" value="Chegará entre" required>
+                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio1" value="Chegará entre " required>
               </div>
               <div class="col">
                 <p class="font-weight-bold text-light" id="opcaoEnvio1">Chegará entre </p>
@@ -137,7 +146,7 @@
             </div>
             <div class="row mb-0 mt-3 ml-0">
               <div class="col-sm-1"> 
-                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio2" value="Chegará entre" required>
+                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio2" value="Chegará entre " required>
               </div>
               <div class="col">
                 <p class="font-weight-bold text-light" id="opcaoEnvio2">Chegará entre </p>
@@ -153,7 +162,7 @@
           <div class="divProdutoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
             <div class="row mb-0 mt-3 ml-0">
               <div class="col-sm-1 my-auto"> 
-                <input type="radio" name="opcaoPagamento" id="radioOpcaoPagamento1" value="CartaoCredito">
+                <input type="radio" name="opcaoPagamento" id="radioOpcaoPagamento1" value="Cartao de Crédito" required>
               </div>
               <div class="col-sm-1 ml-1">
                 <svg class="text-primary" width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-credit-card" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -168,7 +177,7 @@
 
             <div class="row mb-3 mt-3 ml-0">
               <div class="col-sm-1 my-auto"> 
-                <input type="radio" name="opcaoPagamento" id="radioOpcaoPagamento2" value="Boleto">
+                <input type="radio" name="opcaoPagamento" id="radioOpcaoPagamento2" value="Boleto" required>
               </div>
               <div class="col-sm-1">
                 <svg class="text-primary" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-upc" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
