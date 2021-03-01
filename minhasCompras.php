@@ -82,11 +82,9 @@
             
               $consulta = $conexao->query($script);
 
-              for ($i = 0; $i < $totalCompras; $i++) { 
-                while ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
-                  $idCompra = $linha['id'];
-                  echo '
-
+              while ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
+                $idCompra = $linha['id'];
+                echo '
       <div class="divProdutoCarrinho border-0 card rounded w-100 h-auto darkmode-ignore mb-4">       
             <div class="row mb-0">
               <table class="ml-4">
@@ -99,7 +97,7 @@
                 <tr>
               </table>
             </div>
-          </div>'; }}
+          </div>'; }
           ?> 
     </div>
 
