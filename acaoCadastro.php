@@ -5,7 +5,7 @@ echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min
 
 function inserir($conexao, $nome, $sobrenome, $data_nascimento, $sexo, $cpf, $cep, $telefone, $endereco, $num_endereco, $complemento, $cidade, $bairro, $estado, $email, $senha) {
 	
-	$script = 'INSERT INTO usuarios VALUES (DEFAULT, "' . 0 . '", "' . $nome . '", "' . $sobrenome . '","' . $data_nascimento . '","' . $sexo . '", "' . $cpf . '", "' . $cep . '", "' . $telefone . '", "' . $endereco . '", "' . $num_endereco . '", "' . $complemento . '", "' . $cidade . '", "' . $bairro . '", "' . $estado . '", "' . $email . '", ' . $senha . ')';
+	$script = 'INSERT INTO usuarios VALUES (DEFAULT, "' . 0 . '", "' . $nome . '", "' . $sobrenome . '","' . $data_nascimento . '","' . $sexo . '", "' . $cpf . '", "' . $cep . '", "' . $telefone . '", "' . $endereco . '", "' . $num_endereco . '", "' . $complemento . '", "' . $cidade . '", "' . $bairro . '", "' . $estado . '", "' . $email . '", "' . $senha . '")';
 
 	$insere = $conexao->query($script);
 
