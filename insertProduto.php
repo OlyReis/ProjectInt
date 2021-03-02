@@ -38,6 +38,4 @@ $destino= "$dir".$file["name"];
 move_uploaded_file($file['tmp_name'], $destino);
 
 inserir($conexao,$destino,$nomeProduto,$lancamentoProduto,$descricaoProdutoMenu,$precoProduto,$estoqueProduto,$numTamanhos,$tamanhosProduto,$descricaoProduto);
-
-echo  html_entity_decode($descricaoProduto);
 ?>
