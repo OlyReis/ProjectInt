@@ -143,6 +143,7 @@
         $nome = $linha['nome'];
         $descricaoMenu = $linha['descricaoM'];
         $foto = $linha['foto'];
+        $valor=$linha['preco'];
 
   echo '
       <tr>
@@ -155,6 +156,7 @@
         </td>
         <td>
           <h5 class="card-title text-primary text-justify">' . $nome . '</h5>
+           <p class="card-text text-danger text-justify">' . $valor . '</p>
           <p class="card-text text-danger text-justify">' . $descricaoMenu . '</p>
           <button type="button" class="btn darkmode-ignore btnVerMais"><a href="paginaProduto.php?id=' . $id . '" name="1">Ver mais...</a></button>
         </td>
