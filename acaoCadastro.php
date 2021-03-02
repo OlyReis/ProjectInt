@@ -16,7 +16,7 @@ function inserir($conexao, $nome, $sobrenome, $data_nascimento, $sexo, $cpf, $ce
 			echo "<script> $.confirm({type: 'red', title: 'Cadastro', content: 'Email já cadastrado.', buttons: { Ok: { btnClass: 'btn-red', action: function () {"; echo 'window.location="cadastro.php"'; echo " }}}});</script>";
 		} else {
 	
-			$script = 'INSERT INTO usuarios VALUES (DEFAULT, "' . 0 . '", "' . $nome . '", "' . $sobrenome . '","' . $data_nascimento . '","' . $sexo . '", "' . $cpf . '", "' . $cep . '", "' . $telefone . '", "' . $endereco . '", "' . $num_endereco . '", "' . $complemento . '", "' . $cidade . '", "' . $bairro . '", "' . $estado . '", "' . $email . '", "' . $senha . '")';
+			$script = 'INSERT INTO usuarios VALUES (DEFAULT, "' . 0 . '", "' . $nome . '", "' . $sobrenome . '","' . $data_nascimento . '","' . $sexo . '", "' . $cpf . '", "' . $cep . '", "' . $telefone . '", "' . $endereco . '", "' . $num_endereco . '", "' . $complemento . '", "' . $cidade . '", "' . $bairro . '", "' . $estado . '", "' . $email . '", "' . $senha . '","","","","","")';
 
 			$insere = $conexao->query($script);
 
