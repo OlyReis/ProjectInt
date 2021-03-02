@@ -1,39 +1,46 @@
 <?php
-  include('conexao.php');
+include('conexao.php');
 
-  session_start();
-  if (isset($_SESSION['email'])) 
-  { 
-    $logado = $_SESSION['email'];
-    $script = 'SELECT * FROM usuarios WHERE email = "' . $logado . '"';
-    $consulta = $conexao->query($script);
-    $linha = $consulta->fetch_array(MYSQLI_ASSOC);
-    $nome = $linha['nome'];
-    $sobrenome = $linha['sobrenome'];
-    $data_nascimento = $linha['data'];
-    $sexo = $linha['sexo'];
-    $cpf = $linha['cpf'];
-    $cep = $linha['cep'];
-    $telefone = $linha['telefone'];
-    $endereco = $linha['endereco'];
-    $num_endereco = $linha['numero'];
-    $complemento = $linha['complemento'];
-    $cidade = $linha['cidade'];
-    $bairro = $linha['bairro'];
-    $estado = $linha['estado'];
-    $email = $linha['email'];
-    
-    if (isset($_SESSION['nItensCarrinho'])) {
-      $nItensCarrinho = $_SESSION['nItensCarrinho'];
-    } else {
-      $_SESSION['nItensCarrinho'] = 0;
-      $nItensCarrinho = $_SESSION['nItensCarrinho'];
-    }
+session_start();
+if (isset($_SESSION['email'])) 
+{ 
+  $logado = $_SESSION['email'];
+  $script = 'SELECT * FROM usuarios WHERE email = "' . $logado . '"';
+  $consulta = $conexao->query($script);
+  $linha = $consulta->fetch_array(MYSQLI_ASSOC);
+  $id=$linha['id'];
+  $nome = $linha['nome'];
+  $sobrenome = $linha['sobrenome'];
+  $data_nascimento = $linha['data'];
+  $sexo = $linha['sexo'];
+  $cpf = $linha['cpf'];
+  $cep = $linha['cep'];
+  $telefone = $linha['telefone'];
+  $endereco = $linha['endereco'];
+  $num_endereco = $linha['numero'];
+  $complemento = $linha['complemento'];
+  $cidade = $linha['cidade'];
+  $bairro = $linha['bairro'];
+  $estado = $linha['estado'];
+  $email = $linha['email'];
 
+  $nCartao=$linha['nCartao'];
+  $cpf=$linha['cpfCartao'];
+  $nomeCartao=$linha['nomeCartao'];
+  $validade=$linha['validadeCartao'];
+  $codigoSeg=$linha['codigoSeg']; 
+
+  if (isset($_SESSION['nItensCarrinho'])) {
+    $nItensCarrinho = $_SESSION['nItensCarrinho'];
   } else {
     $_SESSION['nItensCarrinho'] = 0;
     $nItensCarrinho = $_SESSION['nItensCarrinho'];
   }
+
+} else {
+  $_SESSION['nItensCarrinho'] = 0;
+  $nItensCarrinho = $_SESSION['nItensCarrinho'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -121,13 +128,13 @@
           </div>
         </div>
         <?php            
-          if ($sexo == "Masculino") {
-            echo "<script> $('#SexoMasculino').attr('checked','checked') </script>";      
-          } else if ($sexo == "Feminino") {
-            echo "<script> $('#SexoFeminino').attr('checked','checked') </script>"; 
-          } else if ($sexo == "Outro") {
-            echo "<script> $('#SexoOutro').attr('checked','checked') </script>"; 
-          }
+        if ($sexo == "Masculino") {
+          echo "<script> $('#SexoMasculino').attr('checked','checked') </script>";      
+        } else if ($sexo == "Feminino") {
+          echo "<script> $('#SexoFeminino').attr('checked','checked') </script>"; 
+        } else if ($sexo == "Outro") {
+          echo "<script> $('#SexoOutro').attr('checked','checked') </script>"; 
+        }
         ?>
         <div class="form-row">
           <div class="col mb-3">
@@ -208,18 +215,19 @@
           <div class="form-row mb-2 mt-3 ml-3">
             <label form="labelNome">*Campos Obrigatórios</label>
           </div>
-          <form class="needs-validation m-4" novalidate>
+
+          <form class="needs-validation m-4" method="POST" action="insertCartao.php">
             <div class="form-row mb-3 mt-3">
               <div class="col">
                 <label form="labelNumCartao" class="mb-0">*Número do Cartão</label> 
-                <input type="text" class="form-control input rounded-0" id="validationCustomNumCartao" placeholder="*Digite o número do cartão" name="numCartao" data-mask="0000 0000 0000 0000" pattern="[0-9]{4}[\s][0-9]{4}[\s][0-9]{4}[\s][0-9]{4}" required>
+                <input type="text" class="form-control input rounded-0" id="validationCustomNumCartao" placeholder="*Digite o número do cartão" name="numCartao" data-mask="0000 0000 0000 0000" pattern="[0-9]{4}[\s][0-9]{4}[\s][0-9]{4}[\s][0-9]{4}" value="<?php echo $nCartao; ?>" required>
                 <div class="invalid-feedback">
                   Por favor insira um número válido.
                 </div>
               </div>
               <div class="col">
                 <label form="labelCPF" class="mb-0">*CPF do Titular do Cartão</label>
-                <input type="text" class="form-control input rounded-0" data-mask="00000000000" placeholder="*Digite o CPF" name="cpf" id="validationCustomCPF" pattern="([0-9]{11})" required>
+                <input type="text" class="form-control input rounded-0" data-mask="00000000000" placeholder="*Digite o CPF" name="cpf" id="validationCustomCPF" pattern="([0-9]{11})" value="<?php echo $cpfCartao; ?>" required>
                 <div class="invalid-feedback">
                   Por favor insira um CPF válido.
                 </div>
@@ -228,7 +236,7 @@
             <div class="form-row mb-3 mt-3">
               <div class="col">
                 <label form="labelNome" class="mb-0">*Nome Completo</label> 
-                <input type="text" class="form-control input rounded-0" id="validationCustomNomeCartao" placeholder="*Digite o Nome Completo" onkeypress="return validaNomes(event);" name="nomeCompleto" required>
+                <input type="text" class="form-control input rounded-0" id="validationCustomNomeCartao" placeholder="*Digite o Nome Completo" onkeypress="return validaNomes(event);" name="nomeCompleto" value="<?php echo $nomeCartao; ?>" required>
                 <div class="invalid-feedback">
                   Por favor insira um nome válido.
                 </div>
@@ -237,20 +245,20 @@
             <div class="form-row mb-3">
               <div class="col">
                 <label form="labelDataVenc">*Data de Vencimento</label>
-                <input class="form-control input rounded-0" id="validationCustomData" name="date" placeholder="*Mês/Ano" type="text" data-mask="00/0000" name="data_nascimento" pattern="[^-,]{7}" required>
+                <input class="form-control input rounded-0" id="validationCustomData"  placeholder="*Mês/Ano" type="text" data-mask="00/0000" name="data" pattern="[^-,]{7}" value="<?php echo $validadeCartao; ?>" required>
                 <div class="invalid-feedback" id="datainvalida">
                   Por favor insira uma data válida.
                 </div>
               </div>
               <div class="col">
                 <label form="labelCodigoSeguranca">*Código de Segurança</label>
-                <input type="text" class="form-control input rounded-0" id="validationCustomCodigoSeguranca" placeholder="*(Últimos 3 números no verso do cartão)" name="numCartao" data-mask="000" pattern="[0-9]{3}" required>
+                <input type="text" class="form-control input rounded-0" id="validationCustomCodigoSeguranca" placeholder="*(Últimos 3 números no verso do cartão)" name="codCartao" data-mask="000" pattern="[0-9]{3}" value="<?php echo $codigoSeg; ?>" required>
                 <div class="invalid-feedback">
                   Por favor insira um código válido.
                 </div>
               </div>
             </div>
-            <button class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnPagarCartao">Alterar Cartão</button>
+            <button class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnPagarCartao">Adicionar Cartão</button>
           </form>
         </div>
       </div>
