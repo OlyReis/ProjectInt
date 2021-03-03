@@ -23,7 +23,7 @@
 	move_uploaded_file($file['tmp_name'], $destino);
 
 	$script= 'UPDATE produtos SET nome= "'.$nomeProduto.'",anoLancamento="'.$anoLancamento.'",descricaoM="'.$descricaoProdutoMenu.'",preco='.$precoProduto.',qtd="'.$quantidadeProduto.'", NTP= "'.$numTamanhos.'",tamanho="'.$tamanhosProduto.'",foto="'.$destino.'",descricaoP="'.$descricaoProduto.'" WHERE id= '.$id;
-
+echo $script;
 
 	$altera = $conexao->query($script);
 
