@@ -55,7 +55,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 91px;">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 101px;">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link " href="index.php">Menu<span class="sr-only"></span></a>
@@ -90,17 +90,17 @@
 
             $primeiraLinha = true;
             $idProdutos = $linha['idProdutos'];
-            $idCadaProduto = explode(",",$idProdutos);
+            $idCadaProduto = explode("¬",$idProdutos);
             $nomeProdutos = $linha['nomeProdutos'];
-            $nomeCadaProduto = explode(",",$nomeProdutos);
+            $nomeCadaProduto = explode("¬",$nomeProdutos);
             $fotoProdutos = $linha['fotoProdutos'];
-            $fotoCadaProduto = explode(",",$fotoProdutos);
+            $fotoCadaProduto = explode("¬",$fotoProdutos);
             $qtdProdutos = $linha['qtdProdutos'];
-            $qtdCadaProduto = explode(",",$qtdProdutos);
+            $qtdCadaProduto = explode("¬",$qtdProdutos);
             $tamanhoProdutos = $linha['tamanhoProdutos'];
-            $tamanhoCadaProduto = explode(",",$tamanhoProdutos);
+            $tamanhoCadaProduto = explode("¬",$tamanhoProdutos);
             $valorProdutos = $linha['valorProdutos'];
-            $valorCadaProduto = explode(",",$valorProdutos);
+            $valorCadaProduto = explode("¬",$valorProdutos);
             $modoPagamento = $linha['modoPagamento'];
             $valorTotal = $linha['valorTotal'];
 

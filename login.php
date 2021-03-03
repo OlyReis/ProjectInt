@@ -68,10 +68,6 @@
     </form>
 </div>
 
-
-
-
-
   <footer class="py-5 mt-5">
   <div class="row">
     <div class="col- col-12 col-md">

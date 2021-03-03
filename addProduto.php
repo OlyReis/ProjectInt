@@ -64,7 +64,7 @@ if (isset($_SESSION['email']))
         <?php
        if (isset($_SESSION['email'])) {
         echo '
-        <div class="dropdown show" style="margin-right: 65px;">
+        <div class="dropdown show" style="margin-right: 101px;">
         <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         ' . $nome . '
         </a>
@@ -88,7 +88,7 @@ if (isset($_SESSION['email']))
 
     <h1 class="col-12">Adicionar Produto</h1><br>
     <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
-      <form class="needs-validation m-4" method="POST" enctype="multipart/form-data" action="insertProduto.php">
+      <form class="needs-validation m-4" method="POST" enctype="multipart/form-data" action="acaoAdicionarProduto.php">
         <div class="form-row mb-3 mt-3">
           <div class="col">
             <label form="labelNomeProduto" class="mb-0">Nome do Produto</label> 

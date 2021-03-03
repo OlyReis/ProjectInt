@@ -25,7 +25,7 @@
     if ($_SESSION['nItensCarrinho'] != 0) {
       $nItensCarrinho = $_SESSION['nItensCarrinho'];
       $idsCarrinho = $_SESSION['idsCarrinho'];
-      $idCadaProdutoCarrinho = explode(",", $idsCarrinho);
+      $idCadaProdutoCarrinho = explode("¬", $idsCarrinho);
     } else {
       $_SESSION['nItensCarrinho'] = 0;
       $nItensCarrinho = $_SESSION['nItensCarrinho'];
@@ -75,13 +75,14 @@
       <?php
       if (isset($_SESSION['email'])) {
         echo '
-        <div class="dropdown show" style="margin-right: 65px;">
+        <div class="dropdown show" style="margin-right: 101px;">
           <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             ' . $nome . '
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: red;">
             <a class="dropdown-item" href="usuario.php">Meus Dados</a>
+            <a class="dropdown-item" id="minhasCompras" href="minhasCompras.php">Minhas Compras</a>
             <a class="dropdown-item" id="deletarConta" href="deletarConta.php">Deletar Conta</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
@@ -105,7 +106,6 @@
         <input type="hidden" name="precoTodosProdutos" value="<?php echo $precoTodosProdutos; ?>">
         <input type="hidden" name="nomeTodosProdutos" value="<?php echo $nomeTodosProdutos; ?>">
         <input type="hidden" name="fotoTodosProdutos" value="<?php echo $fotoTodosProdutos; ?>">
-        <input type="hidden" name="valorTotal" value="<?php echo $valorTotal; ?>">
       <div class="row">
         <div class="col-sm-6">
           <h3 class="col-12 mb-4">Como você quer receber sua compra?</h3>
@@ -140,22 +140,28 @@
           </div>
           <div class="divProdutoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
             <div class="row mb-0 mt-3 ml-0">
+              <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-truck text-light ml-3 mt-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+              </svg>
               <div class="col-sm-1"> 
-                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio1" value="Chegará entre " required>
+                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio1" value="Sedex - Chegará entre " class="mt-3" required>
               </div>
               <div class="col">
-                <p class="font-weight-bold text-light" id="opcaoEnvio1">Sedex chegará entre </p>
+                <p class="font-weight-bold text-light" id="opcaoEnvio1">Sedex - Chegará entre </p>
               </div>
               <div class="col-sm-3">
                 <p class="font-weight-bold text-light" id="opcaoEnvio1Valor">R$ 20,50</p>
               </div>
             </div>
             <div class="row mb-0 mt-3 ml-0">
+              <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-truck text-light ml-3 mt-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+              </svg>
               <div class="col-sm-1"> 
-                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio2" value="Chegará entre " required>
+                <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio2" value="PAC - Chegará entre " class="mt-3" required>
               </div>
               <div class="col">
-                <p class="font-weight-bold text-light" id="opcaoEnvio2">PAC chegará entre </p>
+                <p class="font-weight-bold text-light" id="opcaoEnvio2">PAC - Chegará entre </p>
               </div>
               <div class="col-sm-3">
                 <p class="font-weight-bold text-light" id="opcaoEnvio2Valor">R$ 4,90</p>
@@ -177,6 +183,10 @@
                 </svg>
               </div>
               <div class="col">
+                <input type="hidden" name="iconeCartaoCredito" value="<svg class='text-primary' width='1.5em' height='1.5em' viewBox='0 0 16 16' class='bi bi-credit-card' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+                  <path fill-rule='evenodd' d='M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z'/>
+                  <path d='M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z'/>
+                </svg>">
                 <p class="font-weight-bold text-light my-auto align-middle pt-0" id="opcaoPagamento1">Cartão de Crédito</p>
               </div>
             </div>
@@ -191,6 +201,9 @@
                 </svg>
               </div>
               <div class="col">
+                <input type="hidden" name="iconeBoleto" value="<svg class='text-primary' width='2em' height='2em' viewBox='0 0 16 16' class='bi bi-upc' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+                  <path d='M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z'/>
+                </svg>">
                 <p class="font-weight-bold text-light  my-auto align-middle pt-1" id="opcaoPagamento2">Boleto</p>
               </div>
             </div>

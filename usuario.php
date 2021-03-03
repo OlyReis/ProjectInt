@@ -25,7 +25,7 @@ if (isset($_SESSION['email']))
   $email = $linha['email'];
 
   $nCartao=$linha['nCartao'];
-  $cpf=$linha['cpfCartao'];
+  $cpfCartao=$linha['cpfCartao'];
   $nomeCartao=$linha['nomeCartao'];
   $validade=$linha['validadeCartao'];
   $codigoSeg=$linha['codigoSeg']; 
@@ -176,7 +176,7 @@ if (isset($_SESSION['email']))
         <div class="form-row">
           <div class="col mt-3">
             <label form="labelCidade" class="mb-0">Cidade</label> 
-            <input type="text" class="form-control input rounded-0" id="validationCustomCidade"  pattern="[a-zA-Z]+" name="cidade" placeholder="Digite sua Cidade" value="<?php echo $cidade; ?>" required>
+            <input type="text" class="form-control input rounded-0" id="validationCustomCidade" name="cidade" placeholder="Digite sua Cidade" value="<?php echo $cidade; ?>" required>
             <div class="invalid-feedback">
               Por favor insira uma Cidade válida.
             </div>
@@ -209,14 +209,14 @@ if (isset($_SESSION['email']))
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <h3 class="col-12 mb-4">Adicionar Cartão</h3>
+          <h3 class="col-12 mb-4">Cartão</h3>
         </div>
         <div class="container col-12 divcadastro rounded border border-primary mb-5"> 
           <div class="form-row mb-2 mt-3 ml-3">
             <label form="labelNome">*Campos Obrigatórios</label>
           </div>
 
-          <form class="needs-validation m-4" method="POST" action="insertCartao.php">
+          <form class="needs-validation m-4" method="POST" action="acaoAlterarCartao.php">
             <div class="form-row mb-3 mt-3">
               <div class="col">
                 <label form="labelNumCartao" class="mb-0">*Número do Cartão</label> 
@@ -245,20 +245,20 @@ if (isset($_SESSION['email']))
             <div class="form-row mb-3">
               <div class="col">
                 <label form="labelDataVenc">*Data de Vencimento</label>
-                <input class="form-control input rounded-0" id="validationCustomData"  placeholder="*Mês/Ano" type="text" data-mask="00/0000" name="data" pattern="[^-,]{7}" value="<?php echo $validadeCartao; ?>" required>
+                <input class="form-control input rounded-0" id="validationCustomData"  placeholder="*Mês/Ano" type="text" data-mask="00/0000" name="data" pattern="[^-,]{7}" value="<?php echo $validade; ?>" required>
                 <div class="invalid-feedback" id="datainvalida">
                   Por favor insira uma data válida.
                 </div>
               </div>
               <div class="col">
                 <label form="labelCodigoSeguranca">*Código de Segurança</label>
-                <input type="text" class="form-control input rounded-0" id="validationCustomCodigoSeguranca" placeholder="*(Últimos 3 números no verso do cartão)" name="codCartao" data-mask="000" pattern="[0-9]{3}" value="<?php echo $codigoSeg; ?>" required>
+                <input type="text" class="form-control input rounded-0" id="validationCustomCodigoSeguranca" placeholder="*(Últimos 3 números no verso do cartão)" name="codCartao" data-mask="000" pattern="[0-9]{3}" value="<?php if ($codigoSeg != 0 ) echo $codigoSeg; ?>" required>
                 <div class="invalid-feedback">
                   Por favor insira um código válido.
                 </div>
               </div>
             </div>
-            <button class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnPagarCartao">Adicionar Cartão</button>
+            <button class="btn btn-primary btn-sm btn-rounded font-weight-bold mb-2 mt-2 w-100" style="height: 40px; font-size: 16px;" id="btnPagarCartao">Alterar Cartão</button>
           </form>
         </div>
       </div>

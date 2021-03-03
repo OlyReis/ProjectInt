@@ -9,12 +9,10 @@
   $sql = 'SELECT * FROM usuarios WHERE email = "' . $email . '" AND senha = "' . $senha . '"';
   $resultado = mysqli_query($conexao, $sql);
   if($at = mysqli_num_rows($resultado) > 0) {
-    echo 'Existe';
     $_SESSION['email'] = $email;
     $_SESSION['senha'] = $senha;
     echo "<script> $.confirm({type: 'red', title: 'Login', content: 'Login Conectado!', buttons: { Ok: { btnClass: 'btn-red', action: function () {"; echo 'window.location="index.php"'; echo " }}}});</script>";
   } else {
-    echo 'Não Existe';
     unset ($_SESSION['email']);
     unset ($_SESSION['senha']);
      echo "<script> $.confirm({type: 'red', title: 'Login', content: 'Email ou Senha incorretos.', buttons: { Ok: { btnClass: 'btn-red', action: function () {"; echo 'window.location="login.php"'; echo " }}}});</script>";

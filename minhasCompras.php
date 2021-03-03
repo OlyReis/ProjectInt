@@ -45,7 +45,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 91px;">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 101px;">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link " href="index.php">Menu<span class="sr-only"></span></a>
@@ -83,13 +83,13 @@
             
               $consulta = $conexao->query($script);
 
-              if ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
+              if ($totalCompras > 0) {
                 $fezCompras = true;
 
                 while ($linha = $consulta->fetch_array(MYSQLI_ASSOC)) {
                   $idCompra = $linha['id'];
                   $qtdProdutos = $linha['qtdProdutos'];
-                  $qtdCadaProduto = explode(",",$qtdProdutos);
+                  $qtdCadaProduto = explode("¬",$qtdProdutos);
                   $qtdTotal = 0;
                   for ($i = 0; $i < count($qtdCadaProduto); $i++) {
                     $qtdTotal += (int)$qtdCadaProduto[$i];

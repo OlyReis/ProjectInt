@@ -11,17 +11,17 @@ $fotoTodosProdutos = "";
 
 for($i = 1; $i <= $qtdProdutos; $i++) {
   $idProduto[$i] = $_POST['idProduto' . $i];
-  $idTodosProdutos = $idTodosProdutos . $idProduto[$i] . ",";
+  $idTodosProdutos = $idTodosProdutos . $idProduto[$i] . "¬";
   $qtdProduto[$i] = $_POST['qtd' . $idProduto[$i]];
-  $qtdTodosProdutos = $qtdTodosProdutos . $qtdProduto[$i] . ",";
+  $qtdTodosProdutos = $qtdTodosProdutos . $qtdProduto[$i] . "¬";
   $tamanhoProduto[$i] = $_POST['tamanhoProduto' . $idProduto[$i]];
-  $tamanhoTodosProdutos = $tamanhoTodosProdutos . $tamanhoProduto[$i] . ",";
+  $tamanhoTodosProdutos = $tamanhoTodosProdutos . $tamanhoProduto[$i] . "¬";
   $precoProduto[$i] = $_POST['precoProduto' . $idProduto[$i]];
-  $precoTodosProdutos = $precoTodosProdutos . $precoProduto[$i] . ",";
+  $precoTodosProdutos = $precoTodosProdutos . $precoProduto[$i] . "¬";
   $nomeProduto[$i] = $_POST['nomeProduto' . $idProduto[$i]];
-  $nomeTodosProdutos = $nomeTodosProdutos . $nomeProduto[$i] . ",";
+  $nomeTodosProdutos = $nomeTodosProdutos . $nomeProduto[$i] . "¬";
   $fotoProduto[$i] = $_POST['fotoProduto' . $idProduto[$i]];
-  $fotoTodosProdutos = $fotoTodosProdutos . $fotoProduto[$i] . ",";
+  $fotoTodosProdutos = $fotoTodosProdutos . $fotoProduto[$i] . "¬";
 }
 
 echo '<form id="formCarrinho" name="formCarrinho" action="compra.php" method="POST">';

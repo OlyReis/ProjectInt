@@ -14,30 +14,37 @@ if (isset($_SESSION['email']))
   $estado = $linha['estado'];
   $cep = $linha['cep'];
   $telefone = $linha['telefone'];
-  $rua=$linha['endereco'];
-  $numero=$linha['numero'];
+  $rua = $linha['endereco'];
+  $numero = $linha['numero'];
 
   $opcaoEnvio = $_POST['opcaoEnvio'];
 
   $opcaoPagamento = $_POST['opcaoPagamento'];
 
+  if ($opcaoPagamento == "Boleto") {
+    $iconeOpcaoEnvio = $_POST['iconeBoleto'];
+  } else {
+    $iconeOpcaoEnvio = $_POST['iconeCartaoCredito'];
+    $numeroCartao = $linha['nCartao'];
+  }
+
 
   $idTodosProdutos = $_POST['idTodosProdutos'];
-  $idCadaProduto = explode(",",$idTodosProdutos);
+  $idCadaProduto = explode("¬",$idTodosProdutos);
   $qtdTodosProdutos = $_POST['qtdTodosProdutos'];
-  $qtdCadaProduto = explode(",",$qtdTodosProdutos);
+  $qtdCadaProduto = explode("¬",$qtdTodosProdutos);
   ;
   $tamanhoTodosProdutos = $_POST['tamanhoTodosProdutos'];
-  $tamanhoCadaProduto = explode(",",$tamanhoTodosProdutos);
+  $tamanhoCadaProduto = explode("¬",$tamanhoTodosProdutos);
 
   $precoTodosProdutos = $_POST['precoTodosProdutos'];
-  $precoCadaProduto = explode(",",$precoTodosProdutos);
+  $precoCadaProduto = explode("¬",$precoTodosProdutos);
 
   $nomeTodosProdutos = $_POST['nomeTodosProdutos'];
-  $nomeCadaProduto = explode(",",$nomeTodosProdutos);
+  $nomeCadaProduto = explode("¬",$nomeTodosProdutos);
 
   $fotoTodosProdutos = $_POST['fotoTodosProdutos'];
-  $fotoCadaProduto = explode(",",$fotoTodosProdutos);
+  $fotoCadaProduto = explode("¬",$fotoTodosProdutos);
 
   $valorTotal = $_POST['valorTotal'];
 
@@ -45,11 +52,10 @@ if (isset($_SESSION['email']))
   date_default_timezone_set('America/Sao_Paulo');
   $dataCompra = date("Y-m-d");
 
-
   if ($_SESSION['nItensCarrinho'] != 0) {
     $nItensCarrinho = $_SESSION['nItensCarrinho'];
     $idsCarrinho = $_SESSION['idsCarrinho'];
-    $idCadaProdutoCarrinho = explode(",", $idsCarrinho);
+    $idCadaProdutoCarrinho = explode("¬", $idsCarrinho);
   } else {
     $_SESSION['nItensCarrinho'] = 0;
     $nItensCarrinho = $_SESSION['nItensCarrinho'];
@@ -99,13 +105,14 @@ if (isset($_SESSION['email']))
         <?php
         if (isset($_SESSION['email'])) {
           echo '
-          <div class="dropdown show" style="margin-right: 65px;">
+          <div class="dropdown show" style="margin-right: 101px;">
           <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           ' . $nome . '
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: red;">
           <a class="dropdown-item" href="usuario.php">Meus Dados</a>
+          <a class="dropdown-item" id="minhasCompras" href="minhasCompras.php">Minhas Compras</a>
           <a class="dropdown-item" id="deletarConta" href="deletarConta.php">Deletar Conta</a>
           <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
@@ -138,79 +145,28 @@ if (isset($_SESSION['email']))
             <p class="text-light ml-1 mb-0">Tamanho: '. $tamanhoCadaProduto[$i].'</p>
             <p class=" mt-0 ml-1 text-light">Quantidade: '. $qtdCadaProduto[$i].'</p>
             <div class="mt-1" style="margin-left: 85%; position:relative;">
-            <svg class="text-light" width="1.5em" height="1.5em" viewBox="0 0 16 16" id="apagarProdutoCarrinho" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="deletaProduto(this)" style="cursor: pointer;">
-            <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-            </svg>
+            
             </div>
             </div>
             </div>
             </div>';
           }
           ?>
-          <form method="POST" action="finalizarCompra.php">
+          <form method="POST" action="acaoConcluirCompra.php">
             <input type="hidden" name="idUsuario" value="<?php echo $idUsuario; ?>">
             <input type="hidden" name="opcaoEnvio" value="<?php echo $opcaoEnvio; ?>">
-            <input type="hidden" name="opcaoPagamento" value="<?php echo $opcaoPagamento; ?>">
+            <input type="hidden" name="opcaoPagamento" value="<?php if ($opcaoPagamento == "Cartão de Crédito") { echo $opcaoPagamento . " - Nº " . $numeroCartao; } else { echo $opcaoPagamento; } ?>">
             <input type="hidden" name="idTodosProdutos" value="<?php echo $idTodosProdutos; ?>">
             <input type="hidden" name="qtdTodosProdutos" value="<?php echo $qtdTodosProdutos; ?>">
             <input type="hidden" name="tamanhoTodosProdutos" value="<?php echo $tamanhoTodosProdutos; ?>">
             <input type="hidden" name="precoTodosProdutos" value="<?php echo $precoTodosProdutos; ?>">
+            <input type="hidden" name="fotoTodosProdutos" value="<?php echo $fotoTodosProdutos; ?>">
             <input type="hidden" name="nomeTodosProdutos" value="<?php echo $nomeTodosProdutos; ?>">
             <input type="hidden" name="dataCompra" value="<?php echo $dataCompra; ?>">
             <input type="hidden" name="valorTotal" value="<?php echo $valorTotal; ?>">
-            <input type="hidden" name="fotoTodosProdutos" value="<?php echo $fotoTodosProdutos; ?>">
-            <h5 class="col-12 mb-2 mt-4">Detalhes do Envio</h5>
-            <div class="divProdutoCarrinho border-5 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
-              <div class="row mb-0 mt-3 ml-0">
-                <div class="col-sm-2 text-center my-auto mr-0">
-                  <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-geo-alt text-light" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                    <path fill-rule="evenodd" d="M8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                  </svg>
-                </div> 
-                <div class="col-sm-9 mt-0 ml-0 p-0">
-                  <p class="font-weight-bold text-light mt-0 mb-0" style="font-size: 15px">Endereço</p>
-                  <p class="text-light mt-0 mb-0" style="font-size: 15px">Nome do Cliente:<?php echo $nome; ?></p>
-                  <p class="text-light mt-0 mb-0" style="font-size: 15px">Cidade:<?php echo $cidade; ?> Estado:<?php echo $estado; ?> - CEP: <?php echo $cep; ?></p>
-                  <p class="text-light mt-0 mb-0" style="font-size: 15px">Rua:<?php echo $rua; ?> Nº:<?php echo $numero; ?> - CEP: <?php echo $cep; ?></p>
-                </div>          
-              </div>
-              <div class="row mb-3 mt-0 ml-0">
-                <div class="col-sm-2">
-                </div>
-                <div class="col-sm-10 p-0 font-weight-bold">
-                  <a href="usuario.php">Alterar</a>
-                </div>
-              </div>
-              <hr style="background-color: black;">
-              <div class="row mb-3 mt-0 ml-2">
-                <div class="col-sm-1">
-                  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-truck text-light" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-                  </svg>
-                </div>
-                <div class="col ml-4">
-                  <p class="text-light font-weight-bold pt-1"><?php echo $opcaoEnvio; ?></p>
-                </div>
-              </div>
-            </div>
-            <h5 class="col-12 mb-2 mt-4">Detalhes do Pagamento</h5>
-            <div class="divProdutoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
-              <div class="row m-2">
-                <div class="col-sm-1">
-                  <svg class="text-primary" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-upc" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
-                  </svg>
-                </div>
-                <div class="col">
-                  <p class="font-weight-bold text-light my-auto align-middle pt-1" id="opcaoPagamento2"><?php echo $opcaoPagamento; ?></p>
-                  <p class="text-light my-auto align-middle pt-1">À Vista</p>
-                </div>
-              </div>
-            </div>
           </div>
-          <div class="col-sm-6">
-            <h3 class="" style="margin-bottom: 55px;">Resumo da Compra</h3>
+          <div class="col-sm-6" style="margin-top: 89px;">
+            
             <div class="divResumoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
               <div class="row mb-0">
                 <div class="col-sm-8">
@@ -239,6 +195,52 @@ if (isset($_SESSION['email']))
               </div>
               <div class="row mt-0 text-center" id="validarPag">
 
+              </div>
+            </div>
+            <h5 class="col-12 mb-2 mt-4">Detalhes do Envio</h5>
+            <div class="divProdutoCarrinho border-5 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
+              <div class="row mb-0 mt-3 ml-0">
+                <div class="col-sm-2 text-center my-auto mr-0">
+                  <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-geo-alt text-light" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                    <path fill-rule="evenodd" d="M8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                  </svg>
+                </div> 
+                <div class="col-sm-9 mt-0 ml-0 p-0">
+                  <p class="font-weight-bold text-light mt-0 mb-0" style="font-size: 15px">Endereço</p>
+                  <p class="text-light mt-0 mb-0" style="font-size: 15px"><?php echo $cidade; ?>, <?php echo $estado; ?> - CEP <?php echo $cep; ?></p>
+                  <p class="text-light mt-0 mb-0" style="font-size: 15px"><?php echo $nome; ?> - <?php echo $telefone; ?></p>
+              </div>          
+              </div>
+              <div class="row mb-3 mt-0 ml-0">
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-10 p-0 font-weight-bold">
+                  <a href="usuario.php">Alterar</a>
+                </div>
+              </div>
+              <hr style="background-color: black;">
+              <div class="row mb-3 mt-0 ml-2">
+                <div class="col-sm-1">
+                  <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-truck text-light" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                </div>
+                <div class="col ml-4">
+                  <p class="text-light font-weight-bold pt-1"><?php echo $opcaoEnvio; ?></p>
+                </div>
+              </div>
+            </div>
+            <h5 class="col-12 mb-2 mt-4">Detalhes do Pagamento</h5>
+            <div class="divProdutoCarrinho border-0 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
+              <div class="row m-2">
+                <div class="col-sm-1">
+                  <?php echo $iconeOpcaoEnvio; ?>
+                </div>
+                <div class="col">
+                  <p class="font-weight-bold text-light my-auto align-middle pt-1" id="opcaoPagamento2"><?php echo $opcaoPagamento; ?><?php if ($opcaoPagamento == "Cartão de Crédito") { echo "<br>Nº " . $numeroCartao . "&nbsp&nbsp<a href='usuario.php'>Alterar</a>"; } ?></p>
+                  <p class="text-light my-auto align-middle pt-1">À Vista</p>
+                </div>
               </div>
             </div>
           </div>

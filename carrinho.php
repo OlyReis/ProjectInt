@@ -13,7 +13,7 @@
     if ($_SESSION['nItensCarrinho'] != 0) {
       $nItensCarrinho = $_SESSION['nItensCarrinho'];
       $idsCarrinho = $_SESSION['idsCarrinho'];
-      $idCadaProdutoCarrinho = explode(",", $idsCarrinho);
+      $idCadaProdutoCarrinho = explode("¬", $idsCarrinho);
     } else {
       $_SESSION['nItensCarrinho'] = 0;
       $nItensCarrinho = $_SESSION['nItensCarrinho'];
@@ -63,13 +63,14 @@
       <?php
       if (isset($_SESSION['email'])) {
         echo '
-        <div class="dropdown show" style="margin-right: 65px;">
+        <div class="dropdown show" style="margin-right: 101px;">
           <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             ' . $nome . '
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: red;">
             <a class="dropdown-item" href="usuario.php">Meus Dados</a>
+            <a class="dropdown-item" id="minhasCompras" href="minhasCompras.php">Minhas Compras</a>
             <a class="dropdown-item" id="deletarConta" href="deletarConta.php">Deletar Conta</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
@@ -158,11 +159,11 @@
                 $nome = $linha['nome'];
                 $foto = $linha['foto'];
                 $estoque = $linha['qtd'];
-                $estoqueCadaProduto = $estoqueCadaProduto . (string)$estoque . ',';
+                $estoqueCadaProduto = $estoqueCadaProduto . (string)$estoque . '¬';
                 $preco = $linha['preco'];
                 $somaPrecos += $preco;
                 $tamanhos = $linha['tamanho'];                
-                $tamanhos = explode(",", $tamanhos);
+                $tamanhos = explode("¬", $tamanhos);
               
               echo '
               <input type="hidden" value="' . $idCadaProdutoCarrinho[$i] . '" name="idProduto' . ($i+1) . '">

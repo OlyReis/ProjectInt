@@ -93,7 +93,7 @@ if (!$consulta) {
        <?php
        if (isset($_SESSION['email'])) {
         echo '
-        <div class="dropdown show" style="margin-right: 65px;">
+        <div class="dropdown show" style="margin-right: 101px;">
         <a class="text-light dropdown-toggle font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         ' . $nome . '
         </a>

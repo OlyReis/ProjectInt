@@ -21,7 +21,6 @@
       } else {
         $_SESSION['nItensCarrinho'] += 1;
         $_SESSION['idsCarrinho'] = $_SESSION['idsCarrinho'] . $id . ",";
-        echo $_SESSION['idsCarrinho'];
         if ($botaoComprar == "sim") {
           echo '<script> window.location = "carrinho.php"; </script>';
         } else {
