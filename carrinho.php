@@ -163,7 +163,7 @@
                 $preco = $linha['preco'];
                 $somaPrecos += $preco;
                 $tamanhos = $linha['tamanho'];                
-                $tamanhos = explode("¬", $tamanhos);
+                $tamanhos = explode(",", $tamanhos);
               
               echo '
               <input type="hidden" value="' . $idCadaProdutoCarrinho[$i] . '" name="idProduto' . ($i+1) . '">
