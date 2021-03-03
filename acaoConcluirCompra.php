@@ -13,8 +13,8 @@ function inserir($conexao, $idUsuario,$opcaoEnvio, $opcaoPagamento, $dataCompra,
 	}else{
 		echo "<script> $.confirm({type: 'red', title: 'Compra finalizada', content: 'Obrigado por comprar na ModasZ, já começaremos a preparar sua encomenda.', buttons: { Ok: { btnClass: 'btn-red', action: function () {"; echo 'window.location="index.php"'; echo " }}}});</script>";
 
-		$idCadaProduto = explode(",",$idTodosProdutos);
-		$qtdCadaProduto = explode(",",$qtdTodosProdutos);
+		$idCadaProduto = explode("¬",$idTodosProdutos);
+		$qtdCadaProduto = explode("¬",$qtdTodosProdutos);
 
 		for ($i = 0; $i < count($idCadaProduto)-1; $i++) {
 
