@@ -95,6 +95,7 @@
                     $qtdTotal += (int)$qtdCadaProduto[$i];
                   }
                   $modoPagamento = $linha['modoPagamento'];
+                  $opcaoEnvio = $linha['opcaoEnvio'];
                   $valorTotal = str_replace(".",",",$linha['valorTotal']);
                   $dataCompra = $linha['dataCompra'];
                   $dataCompraAno = substr($dataCompra,0,4);
@@ -106,7 +107,7 @@
                   <thead class="p-0 m-0">
                     <tr class="d-flex border-0 p-0 m-0">
                       <th class="border-0 text-right col-2 pb-0 pl-0 " style="color: #FF6D20; font-size: 17px;">' . $dataCompra . '</th>
-                      <th class="border-0 text-light text-left col-7 pb-0 ">PEDIDO ' . $idCompra . ' - ' . mb_strtoupper($modoPagamento, 'UTF-8') . '</th>
+                      <th class="border-0 text-light text-left col-7 pb-0 ">PEDIDO ' . $idCompra . ' - ' . mb_strtoupper($modoPagamento, 'UTF-8') . ' - '; if (mb_strpos($opcaoEnvio, "Sedex") !== false) { echo 'Sedex R$ 20,50'; } else { echo 'PAC R$ 4,90'; } echo '</th>
                       <th class="border-0 text-light text-right col-3 pb-0 ">VALOR: R$ ' . $valorTotal . '</th>
                     </tr>
                   </thead>
