@@ -20,7 +20,7 @@
         echo "<script> $.confirm({type: 'red', title: 'Adicionar ao Carrinho', content: 'Produto com 0 de estoque.', buttons: { Ok: { btnClass: 'btn-red', action: function () {"; echo 'window.location="paginaProduto.php?id=' . $id . '"'; echo " }}}});</script>";
       } else {
         $_SESSION['nItensCarrinho'] += 1;
-        $_SESSION['idsCarrinho'] = $_SESSION['idsCarrinho'] . $id . ",";
+        $_SESSION['idsCarrinho'] = $_SESSION['idsCarrinho'] . $id . "¬";
         if ($botaoComprar == "sim") {
           echo '<script> window.location = "carrinho.php"; </script>';
         } else {
