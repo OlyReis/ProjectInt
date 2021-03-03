@@ -144,7 +144,7 @@
                 <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio1" value="Chegará entre " required>
               </div>
               <div class="col">
-                <p class="font-weight-bold text-light" id="opcaoEnvio1">Chegará entre </p>
+                <p class="font-weight-bold text-light" id="opcaoEnvio1">Sedex chegará entre </p>
               </div>
               <div class="col-sm-3">
                 <p class="font-weight-bold text-light" id="opcaoEnvio1Valor">R$ 20,50</p>
@@ -155,7 +155,7 @@
                 <input type="radio" name="opcaoEnvio" id="radioOpcaoEnvio2" value="Chegará entre " required>
               </div>
               <div class="col">
-                <p class="font-weight-bold text-light" id="opcaoEnvio2">Chegará entre </p>
+                <p class="font-weight-bold text-light" id="opcaoEnvio2">PAC chegará entre </p>
               </div>
               <div class="col-sm-3">
                 <p class="font-weight-bold text-light" id="opcaoEnvio2Valor">R$ 4,90</p>
