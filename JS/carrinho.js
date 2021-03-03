@@ -27,5 +27,5 @@ function maisQtd($preco, $idProduto, $estoqueProduto) {
 }
 
 function deletaProduto(idProduto) {
-  window.location = 'deletaProdutoCarrinho.php?id=' + idProduto;
+  window.location = 'acaoDeletaProdutoCarrinho.php?id=' + idProduto;
 }
