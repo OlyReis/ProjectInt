@@ -158,6 +158,7 @@ if (isset($_SESSION['email']))
             <input type="hidden" name="nomeTodosProdutos" value="<?php echo $nomeTodosProdutos; ?>">
             <input type="hidden" name="dataCompra" value="<?php echo $dataCompra; ?>">
             <input type="hidden" name="valorTotal" value="<?php echo $valorTotal; ?>">
+            <input type="hidden" name="fotoTodosProdutos" value="<?php echo $fotoTodosProdutos; ?>">
             <h5 class="col-12 mb-2 mt-4">Detalhes do Envio</h5>
             <div class="divProdutoCarrinho border-5 card rounded-0 w-100 h-auto darkmode-ignore mb-4">
               <div class="row mb-0 mt-3 ml-0">

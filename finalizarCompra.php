@@ -2,9 +2,9 @@
 include("conexao.php");
 echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"> <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">';
 
-function inserir($conexao, $idUsuario,$opcaoEnvio, $opcaoPagamento, $dataCompra, $idTodosProdutos,$nomeTodosProdutos,$qtdTodosProdutos, $tamanhoTodosProdutos,$precoTodosProdutos, $valorTotal) {
+function inserir($conexao, $idUsuario,$idTodosProdutos, $nomeTodosProdutos, $fotoTodosProdutos, $qtdTodosProdutos,$tamanhoTodosProdutos,$valorProdutos, $opcaoPagamento,$valorTotal, $opcaoEnvio,$dataCompra) {
 
-	$script = 'INSERT INTO finalizacaocompra VALUES (DEFAULT, "' . $idUsuario . '", "' . $opcaoEnvio . '", "' . $opcaoPagamento . '","' . $dataCompra . '","' . $idTodosProdutos . '", "' . $nomeTodosProdutos. '", "' . $qtdTodosProdutos . '", "' . $tamanhoTodosProdutos . '", "' . $precoTodosProdutos. '", "' . $valorTotal . '")';
+	$script = 'INSERT INTO compras VALUES (DEFAULT, "' . $idUsuario . '", "' . $idTodosProdutos . '", "' . $nomeTodosProdutos . '","' . $fotoTodosProdutos . '","' . $qtdTodosProdutos . '", "' . $tamanhoTodosProdutos. '", "' . $valorTotal . '", "' . $opcaoPagamento . '", "' . $valorTotal. '", "' . $opcaoEnvio . '","'.$dataCompra.'")';
 
 	$insere = $conexao->query($script);
 
@@ -28,11 +28,12 @@ $idTodosProdutos = $_POST['idTodosProdutos'];
 $nomeTodosProdutos = $_POST['nomeTodosProdutos'];
 $qtdTodosProdutos = $_POST['qtdTodosProdutos'];
 $tamanhoTodosProdutos = $_POST['tamanhoTodosProdutos'];
-$precoTodosProdutos = $_POST['precoTodosProdutos'];
+$valorProdutos = $_POST['precoTodosProdutos'];
 $valorTotal = $_POST['valorTotal'];
+$fotoTodosProdutos=$_POST['fotoTodosProdutos'];
 
 
-inserir($conexao, $idUsuario,$opcaoEnvio, $opcaoPagamento, $dataCompra, $idTodosProdutos,$nomeTodosProdutos,$qtdTodosProdutos, $tamanhoTodosProdutos,$precoTodosProdutos, $valorTotal);
+inserir($conexao, $idUsuario,$idTodosProdutos, $nomeTodosProdutos, $fotoTodosProdutos, $qtdTodosProdutos,$tamanhoTodosProdutos,$valorProdutos, $opcaoPagamento,$valorTotal, $opcaoEnvio,$dataCompra);
 
 
 
