@@ -43,7 +43,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 57px;">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 101px;">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link " href="index.php">Menu<span class="sr-only"></span></a>
@@ -63,6 +63,7 @@
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: red;">
             <a class="dropdown-item" href="usuario.php">Meus Dados</a>
+            <a class="dropdown-item" id="minhasCompras" href="minhasCompras.php">Minhas Compras</a>
             <a class="dropdown-item" id="deletarConta" href="deletarConta.php">Deletar Conta</a>
             <a class="dropdown-item" href="logout.php">Logout</a>
           </div>
